@@ -1,8 +1,11 @@
 import { useCallback, useState } from "react";
 
-import { ApplicationProvider, Button, Layout, Text } from "@ui-kitten/components";
+import { ApplicationProvider, Button, IconRegistry, Layout, Text } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
+import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import theme from "./common/theme";
+import { RootNavigator } from "./features/navigation";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [appTheme, setAppTheme] = useState("dark");
@@ -12,11 +15,12 @@ export default function App() {
   }, []);
 
   return (
-    <ApplicationProvider {...eva} theme={appTheme === "dark" ? theme.dark : theme.light}>
-      <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text category="h1">HOME</Text>
-        <Button onPress={handleChangeTheme}>Toggle theme</Button>
-      </Layout>
-    </ApplicationProvider>
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={appTheme === "dark" ? theme.dark : theme.light}>
+        <StatusBar style="light" />
+        <RootNavigator />
+      </ApplicationProvider>
+    </>
   );
 }
