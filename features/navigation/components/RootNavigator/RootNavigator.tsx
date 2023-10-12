@@ -1,13 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { AppNavigator } from "../AppNavigator";
-import { DefaultTheme, DarkTheme } from "@react-navigation/native";
-import { useColorScheme } from "react-native";
+import { useAppTheme } from "../../../../hooks";
 
 export const RootNavigator = () => {
-  const scheme = useColorScheme();
+  const { navigatorTheme } = useAppTheme();
 
   return (
-    <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
+    <NavigationContainer theme={navigatorTheme}>
       <AppNavigator />
     </NavigationContainer>
   );

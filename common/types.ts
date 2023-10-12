@@ -1,5 +1,12 @@
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
+export type Theme = "light" | "dark" | "automatic";
+
+export interface AppSlice {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+}
+
 export type TabParamList = {
   Home: undefined;
   Profile: undefined;

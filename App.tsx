@@ -1,24 +1,18 @@
-import { useCallback, useState } from "react";
-
-import { ApplicationProvider, Button, IconRegistry, Layout, Text } from "@ui-kitten/components";
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
-import theme from "./common/theme";
 import { RootNavigator } from "./features/navigation";
-import { StatusBar } from "expo-status-bar";
+import { StatusBar, StatusBarStyle } from "expo-status-bar";
+import { useAppTheme } from "./hooks";
 
 export default function App() {
-  const [appTheme, setAppTheme] = useState("dark");
-
-  const handleChangeTheme = useCallback(() => {
-    setAppTheme((prev) => (prev === "dark" ? "light" : "dark"));
-  }, []);
+  const { theme, style } = useAppTheme();
 
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={appTheme === "dark" ? theme.dark : theme.light}>
-        <StatusBar style="light" />
+      <ApplicationProvider {...eva} theme={theme}>
+        <StatusBar style={style as StatusBarStyle} />
         <RootNavigator />
       </ApplicationProvider>
     </>
