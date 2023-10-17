@@ -17,8 +17,8 @@ export const useAppTheme = () => {
     }
 
     return appTheme === "dark"
-      ? { theme: theme.dark, style: "light", navigatorTheme: DarkTheme }
-      : { theme: theme.light, style: "dark", navigatorTheme: DefaultTheme };
+      ? { theme: theme.dark, style: "light", navigatorTheme: DarkTheme, colorScheme: "dark" }
+      : { theme: theme.light, style: "dark", navigatorTheme: DefaultTheme, colorScheme: "light" };
   }, [userTheme, deviceTheme]);
 
   return currentTheme;

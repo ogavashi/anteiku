@@ -12,6 +12,12 @@ export type TabParamList = {
   Profile: undefined;
 };
 
+export type AuthStackParamList = {
+  Boarding: undefined;
+  Login: undefined;
+  Register: undefined;
+};
+
 export type HomeScreenProps = BottomTabScreenProps<TabParamList, "Home">;
 
 export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Profile">;

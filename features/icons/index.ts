@@ -1,1 +1,1 @@
-export { HomeIcon, ProfileIcon } from "./components";
+export { HomeIcon, ProfileIcon, BackIcon } from "./components";

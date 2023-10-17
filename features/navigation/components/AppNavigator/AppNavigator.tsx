@@ -1,15 +1,14 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Profile } from "../../../../screens";
-import { BottomTabBar } from "../BottomTabBar";
-import { TabParamList } from "../../../../common/types";
+import { createStackNavigator } from "@react-navigation/stack";
+import { TabNavigator } from "../TabNavigator";
+import { AuthNavigator } from "../AuthNavigator";
 
-const Tab = createBottomTabNavigator<TabParamList>();
+const Stack = createStackNavigator();
 
 export const AppNavigator = () => {
   return (
-    <Tab.Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={Profile} />
-    </Tab.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen name="Auth" component={AuthNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="App" component={TabNavigator} options={{ headerShown: false }} />
+    </Stack.Navigator>
   );
 };
