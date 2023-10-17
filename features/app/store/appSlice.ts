@@ -1,4 +1,4 @@
-import { StateCreator, create } from "zustand";
+import { StateCreator } from "zustand";
 import { AppSlice, Theme } from "../../../common/types";
 
 export const useAppSlice: StateCreator<AppSlice> = (set) => ({
