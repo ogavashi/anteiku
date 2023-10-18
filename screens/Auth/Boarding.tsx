@@ -2,15 +2,10 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { Button, Layout, Text } from "@ui-kitten/components";
 import { View } from "react-native";
 import { AuthStackParamList } from "../../common/types";
-import { useCallback } from "react";
 
 export const Boarding: React.FC<StackScreenProps<AuthStackParamList, "Boarding">> = ({
   navigation,
 }) => {
-  const handleNavigate = useCallback((path: keyof AuthStackParamList) => {
-    navigation.navigate(path);
-  }, []);
-
   return (
     <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <View style={{ width: "80%" }}>
@@ -34,8 +29,8 @@ export const Boarding: React.FC<StackScreenProps<AuthStackParamList, "Boarding">
           </Text>
         </View>
         <View style={{ display: "flex", gap: 15, marginVertical: 40 }}>
-          <Button onPress={() => handleNavigate("Register")}>Sign Up</Button>
-          <Button appearance="ghost" onPress={() => handleNavigate("Login")}>
+          <Button onPress={() => navigation.navigate("Register")}>Sign Up</Button>
+          <Button appearance="ghost" onPress={() => navigation.navigate("Login")}>
             Login
           </Button>
         </View>
