@@ -1,6 +1,6 @@
 import { RenderProp } from "@ui-kitten/components/devsupport";
 import { TopNavigation as EvaTopNavigation } from "@ui-kitten/components";
-import { TopActions } from "../../../../features/auth";
+import { TopActions } from "../TopActions";
 import { ImageProps } from "react-native-svg";
 import { GestureResponderEvent } from "react-native";
 

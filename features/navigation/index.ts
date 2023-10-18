@@ -1,1 +1,1 @@
-export { RootNavigator, TopNavigation } from "./components";
+export { TopNavigation } from "./components";
