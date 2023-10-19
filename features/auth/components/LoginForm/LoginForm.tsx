@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { GestureResponderEvent, ImageProps, TouchableWithoutFeedback, View } from "react-native";
 import { Button, Icon, Input, Text } from "@ui-kitten/components";
-import { RenderProp } from "@ui-kitten/components/devsupport";
+import { Controller, useForm } from "react-hook-form";
 
 interface LoginFormProps {
   handleLogin: (event: GestureResponderEvent) => void;
@@ -10,9 +10,19 @@ interface LoginFormProps {
 export const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ defaultValues: { email: "", password: "" }, reValidateMode: "onSubmit" });
+
   const toggleSecureEntry = useCallback(() => {
     setSecureTextEntry((prev) => !prev);
   }, []);
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
 
   const renderIcon = (props: any) => (
     <TouchableWithoutFeedback onPress={toggleSecureEntry}>
@@ -25,38 +35,73 @@ export const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
       style={{
         width: "90%",
         display: "flex",
-        gap: 20,
+        gap: 10,
       }}
     >
       <View style={{ display: "flex", gap: 10, minHeight: 120 }}>
-        <Input
-          label={() => (
-            <Text category="h4" status="danger" style={{ marginBottom: 5 }}>
-              Email address
-            </Text>
+        <Controller
+          name="email"
+          control={control}
+          rules={{ required: "Can't be empty" }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              label={() => (
+                <Text
+                  category="h4"
+                  status={errors?.email ? "danger" : "basic"}
+                  style={{ marginBottom: 5 }}
+                >
+                  Email address
+                </Text>
+              )}
+              size="large"
+              status={errors?.email ? "danger" : "basic"}
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+            />
           )}
-          size="large"
-          status="danger"
         />
-        <Text category="h6" status="danger">
-          Invalid email address
-        </Text>
+        {errors?.email && (
+          <Text category="h6" status="danger">
+            {errors.email.message}
+          </Text>
+        )}
       </View>
       <View style={{ display: "flex", gap: 10, minHeight: 120 }}>
-        <Input
-          label={() => (
-            <Text category="h4" style={{ marginBottom: 5 }}>
-              Password
-            </Text>
+        <Controller
+          name="password"
+          rules={{ required: "Can't be empty" }}
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              label={() => (
+                <Text
+                  category="h4"
+                  status={errors?.password ? "danger" : "basic"}
+                  style={{ marginBottom: 5 }}
+                >
+                  Password
+                </Text>
+              )}
+              size="large"
+              status={errors?.password ? "danger" : "basic"}
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              accessoryRight={renderIcon}
+              secureTextEntry={secureTextEntry}
+            />
           )}
-          size="large"
-          accessoryRight={renderIcon}
-          secureTextEntry={secureTextEntry}
         />
-        <Text category="h6" status="danger"></Text>
+        {errors?.password && (
+          <Text category="h6" status="danger">
+            {errors.password.message}
+          </Text>
+        )}
       </View>
       <View>
-        <Button onPress={handleLogin}>Login</Button>
+        <Button onPress={onSubmit}>Login</Button>
       </View>
     </View>
   );
