@@ -1,4 +1,3 @@
-import { Home } from "./../screens/Home/Home";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 export type Theme = "light" | "dark" | "automatic";
@@ -8,9 +7,15 @@ export interface AppSlice {
   setTheme: (theme: Theme) => void;
 }
 
+export type AppStackParamsList = {
+  App: undefined;
+  Auth: undefined;
+  Profile: undefined;
+};
+
 export type TabParamList = {
   Home: undefined;
-  Profile: undefined;
+  Library: undefined;
 };
 
 export type AuthStackParamList = {
@@ -24,4 +29,4 @@ export type AuthStackParamList = {
 
 export type HomeScreenProps = BottomTabScreenProps<TabParamList, "Home">;
 
-export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Profile">;
+export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Library">;

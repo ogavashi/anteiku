@@ -1,1 +1,1 @@
-export { ScrollLayout, AuthLayout } from "./layout";
+export { ScrollLayout, AuthLayout, ProfileLayout } from "./layout";

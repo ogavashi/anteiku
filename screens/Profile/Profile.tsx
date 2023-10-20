@@ -1,16 +1,41 @@
-import { Divider, Layout, TopNavigation, Button } from "@ui-kitten/components";
-import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { HomeScreenProps, ProfileScreenProps } from "../../common/types";
+import { AppStackParamsList } from "../../common/types";
 import { useCallback } from "react";
+import { useStore } from "../../store";
+import { View } from "react-native";
+import { StackScreenProps } from "@react-navigation/stack";
+import { ProfileLayout } from "../../components";
+import { Button } from "@ui-kitten/components";
 
-export const Profile: React.FC<ProfileScreenProps> = ({ navigation }) => {
-  const navigateHome = useCallback(() => {
-    navigation.navigate("Home");
-  }, []);
+export const Profile: React.FC<StackScreenProps<AppStackParamsList, "Profile">> = ({
+  navigation,
+}) => {
+  const { theme, setTheme } = useStore();
+
+  const toggleTheme = useCallback(() => {
+    setTheme(theme === "light" ? "dark" : "light");
+  }, [theme]);
 
   return (
-    <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Button onPress={navigateHome}>Go Home</Button>
-    </Layout>
+    <ProfileLayout title="Personal account">
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", gap: 10 }}>
+        <Button onPress={toggleTheme}>Change theme</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+        <Button>dummy button</Button>
+      </View>
+    </ProfileLayout>
   );
 };

@@ -1,34 +1,37 @@
 import { Divider, Layout, Text } from "@ui-kitten/components";
 import { SafeAreaView, ScrollView } from "react-native";
-import { TopNavigation } from "../../../features/navigation";
+import { TopActions, TopNavigation } from "../../../features/navigation";
 import { Avatar } from "../../ui";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
 import { AppStackParamsList } from "../../../common/types";
+import { CloseIcon } from "../../../features/icons";
 
-interface ScrollLayoutProps {
+interface ProfileLayoutProps {
   title?: string;
 }
 
-export const ScrollLayout: React.FC<React.PropsWithChildren<ScrollLayoutProps>> = ({
+export const ProfileLayout: React.FC<React.PropsWithChildren<ProfileLayoutProps>> = ({
   children,
   title,
 }) => {
   const navigation = useNavigation<NavigationProp<AppStackParamsList>>();
 
-  const openProfile = useCallback(() => {
-    navigation.navigate("Profile");
+  const navigateBack = useCallback(() => {
+    navigation.goBack();
   }, [navigation]);
 
   return (
     <Layout style={{ height: "100%" }}>
       <SafeAreaView>
         <TopNavigation
-          title={() => <Text category="h3">{title || "🍙 Anteiku"}</Text>}
-          accessoryRight={() => <Avatar onPress={openProfile} />}
+          title={() => <Text category="h5">{title}</Text>}
+          accessoryLeft={() => <TopActions icon={CloseIcon} navigate={navigateBack} />}
         />
         <Divider />
-        <ScrollView contentContainerStyle={{ paddingBottom: 70 }}>{children}</ScrollView>
+        <ScrollView contentContainerStyle={{ paddingBottom: 70, paddingTop: 20 }}>
+          {children}
+        </ScrollView>
       </SafeAreaView>
     </Layout>
   );

@@ -8,7 +8,7 @@ import { ScrollLayout } from "../../components";
 
 export const Home: React.FC<HomeScreenProps> = ({ navigation }) => {
   const navigateDetails = useCallback(() => {
-    navigation.navigate("Profile");
+    navigation.navigate("Library");
   }, []);
 
   const { theme, setTheme } = useStore();
