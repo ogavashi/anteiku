@@ -3,7 +3,7 @@ import { TabNavigator } from "../TabNavigator";
 import { AuthNavigator } from "../AuthNavigator";
 import { CardStyleInterpolators } from "@react-navigation/stack";
 import { AppStackParamsList } from "../../../../common/types";
-import { Profile } from "../../../../screens";
+import { Profile, Settings } from "../../../../screens";
 
 const Stack = createStackNavigator<AppStackParamsList>();
 
@@ -21,6 +21,7 @@ export const AppNavigator = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen name="Settings" component={Settings} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

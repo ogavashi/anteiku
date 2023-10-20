@@ -5,15 +5,17 @@ import { Avatar } from "../../ui";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
 import { AppStackParamsList } from "../../../common/types";
-import { CloseIcon } from "../../../features/icons";
+import { BackIcon, CloseIcon } from "../../../features/icons";
 
 interface ProfileLayoutProps {
   title?: string;
+  backMode?: boolean;
 }
 
 export const ProfileLayout: React.FC<React.PropsWithChildren<ProfileLayoutProps>> = ({
   children,
   title,
+  backMode = false,
 }) => {
   const navigation = useNavigation<NavigationProp<AppStackParamsList>>();
 
@@ -26,12 +28,12 @@ export const ProfileLayout: React.FC<React.PropsWithChildren<ProfileLayoutProps>
       <SafeAreaView>
         <TopNavigation
           title={() => <Text category="h5">{title}</Text>}
-          accessoryLeft={() => <TopActions icon={CloseIcon} navigate={navigateBack} />}
+          accessoryLeft={() => (
+            <TopActions icon={backMode ? BackIcon : CloseIcon} navigate={navigateBack} />
+          )}
         />
         <Divider />
-        <ScrollView contentContainerStyle={{ paddingBottom: 70, paddingTop: 20 }}>
-          {children}
-        </ScrollView>
+        {children}
       </SafeAreaView>
     </Layout>
   );

@@ -11,6 +11,7 @@ export type AppStackParamsList = {
   App: undefined;
   Auth: undefined;
   Profile: undefined;
+  Settings: undefined;
 };
 
 export type TabParamList = {

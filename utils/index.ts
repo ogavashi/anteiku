@@ -1,0 +1,1 @@
+export { capitalizeFirst } from "./capitalizeFirst";
