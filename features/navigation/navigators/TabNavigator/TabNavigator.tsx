@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator<TabParamList>();
 export const TabNavigator = () => {
   return (
     <Tab.Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

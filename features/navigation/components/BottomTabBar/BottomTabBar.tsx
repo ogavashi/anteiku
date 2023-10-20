@@ -4,7 +4,6 @@ import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 
 export const BottomTabBar = ({ navigation, state }: BottomTabBarProps) => (
   <BottomNavigation
-    appearance="noIndicator"
     selectedIndex={state.index}
     onSelect={(index) => navigation.navigate(state.routeNames[index])}
   >

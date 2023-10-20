@@ -4,10 +4,10 @@ import { RenderProp } from "@ui-kitten/components/devsupport";
 import { ImageProps } from "react-native-svg";
 
 interface TopActionsProps {
-  navigateBack: (event: GestureResponderEvent) => void;
+  navigate: (event: GestureResponderEvent) => void;
   icon: RenderProp<Partial<ImageProps>> | undefined;
 }
 
-export const TopActions: React.FC<TopActionsProps> = ({ navigateBack, icon }) => {
-  return <TopNavigationAction icon={icon} onPress={navigateBack} />;
+export const TopActions: React.FC<TopActionsProps> = ({ navigate, icon }) => {
+  return <TopNavigationAction icon={icon} onPress={navigate} />;
 };

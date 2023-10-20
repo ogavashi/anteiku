@@ -36,6 +36,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
         width: "90%",
         display: "flex",
         gap: 10,
+        marginTop: 20,
       }}
     >
       <View style={{ display: "flex", gap: 10, minHeight: 120 }}>
@@ -59,6 +60,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
+              keyboardType="email-address"
             />
           )}
         />
