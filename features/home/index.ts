@@ -1,0 +1,1 @@
+export { FeaturedCarousel } from "./components";
