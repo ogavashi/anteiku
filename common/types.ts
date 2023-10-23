@@ -31,3 +31,12 @@ export type AuthStackParamList = {
 export type HomeScreenProps = BottomTabScreenProps<TabParamList, "Home">;
 
 export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Library">;
+
+export type FeaturedAnime = {
+  id: string;
+  type: string;
+  title: string;
+  image: string;
+  showType: string;
+  year: string;
+};

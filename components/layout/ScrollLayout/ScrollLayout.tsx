@@ -28,7 +28,12 @@ export const ScrollLayout: React.FC<React.PropsWithChildren<ScrollLayoutProps>> 
           accessoryRight={() => <Avatar onPress={openProfile} />}
         />
         <Divider />
-        <ScrollView contentContainerStyle={{ paddingBottom: 70 }}>{children}</ScrollView>
+        <ScrollView
+          style={{ height: "100%" }}
+          contentContainerStyle={{ marginVertical: 10, paddingBottom: 70 }}
+        >
+          {children}
+        </ScrollView>
       </SafeAreaView>
     </Layout>
   );

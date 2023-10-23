@@ -1,9 +1,14 @@
 import { Dimensions, View } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { CarouselItem } from "./CarouselItem";
-import { Text } from "@ui-kitten/components";
+import { Spinner, Text } from "@ui-kitten/components";
 import { DotsCarousel } from "../../../../components";
 import { useCallback, useState } from "react";
+import { useFetch } from "../../../../hooks";
+import { FeaturedAnime } from "../../../../common/types";
+import { featured_anime_url } from "../../../../api";
+import { featuredNormalizer } from "../../../../api";
+import { Error } from "../../../../features/error";
 
 export const FeaturedCarousel = () => {
   const width = Dimensions.get("window").width;
@@ -13,28 +18,55 @@ export const FeaturedCarousel = () => {
     setIndex(index);
   }, []);
 
+  const { data, error } = useFetch<FeaturedAnime[]>(featured_anime_url, featuredNormalizer);
+
   return (
-    <View style={{ flex: 1, marginHorizontal: 10, gap: 5 }}>
-      <Text category="h3" style={{ marginHorizontal: 5 }}>
+    <View
+      style={{
+        display: "flex",
+        gap: 5,
+        width: "100%",
+      }}
+    >
+      <Text category="h3" style={{ marginHorizontal: 10 }}>
         Featured
       </Text>
-      <View style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Carousel
-          loop
-          width={width}
-          height={width / 2}
-          autoPlay={true}
-          data={[...new Array(6).keys()]}
-          scrollAnimationDuration={2000}
-          onSnapToItem={handleIndex}
-          autoPlayInterval={3000}
-          onProgressChange={(_, absoluteProgress) => {
-            handleIndex(Math.round(absoluteProgress));
+
+      {error ? (
+        <Error message={error.message} />
+      ) : (
+        <View
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 10,
+            minHeight: 200,
           }}
-          renderItem={({ index }) => <CarouselItem title={String(index)} />}
-        />
-        <DotsCarousel LENGTH={6} index={index} />
-      </View>
+        >
+          {!data ? (
+            <Spinner size="giant" />
+          ) : (
+            <>
+              <Carousel
+                loop
+                width={width}
+                height={width / 2}
+                autoPlay={true}
+                data={data}
+                scrollAnimationDuration={2000}
+                onSnapToItem={handleIndex}
+                autoPlayInterval={3000}
+                onProgressChange={(_, absoluteProgress) => {
+                  handleIndex(Math.round(absoluteProgress));
+                }}
+                renderItem={({ item }) => <CarouselItem item={item} />}
+              />
+              <DotsCarousel LENGTH={data.length} index={index} />
+            </>
+          )}
+        </View>
+      )}
     </View>
   );
 };

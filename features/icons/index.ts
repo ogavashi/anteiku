@@ -5,4 +5,5 @@ export {
   LibraryIcon,
   CloseIcon,
   SettingsIcon,
+  AlertIcon,
 } from "./components";

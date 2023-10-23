@@ -1,18 +1,19 @@
 import { Text } from "@ui-kitten/components";
 import { Image, View } from "react-native";
 import { useAppTheme } from "../../../../hooks";
+import { FeaturedAnime } from "../../../../common/types";
 
 interface CarouselItemProps {
-  title: string;
+  item: FeaturedAnime;
 }
 
-export const CarouselItem: React.FC<CarouselItemProps> = ({ title }) => {
+export const CarouselItem: React.FC<CarouselItemProps> = ({ item }) => {
   return (
     <View
       style={{
         flex: 1,
         justifyContent: "center",
-        marginHorizontal: 5,
+        marginHorizontal: 10,
       }}
     >
       <Image
@@ -22,7 +23,7 @@ export const CarouselItem: React.FC<CarouselItemProps> = ({ title }) => {
           borderRadius: 10,
         }}
         source={{
-          uri: "https://media.kitsu.io/anime/45857/cover_image/7628bd46d94b8a96108292aa7e4d5571.jpg",
+          uri: item.image,
         }}
       />
       <View
@@ -44,9 +45,11 @@ export const CarouselItem: React.FC<CarouselItemProps> = ({ title }) => {
           }}
         >
           <Text category="h6" style={{ color: "white" }}>
-            Jujutsu Kaisen
+            {item.title}
           </Text>
-          <Text style={{ opacity: 0.8, color: "white" }}>TV, 2023</Text>
+          <Text style={{ opacity: 0.8, color: "white" }}>
+            {item.showType}, {item.year}
+          </Text>
         </View>
       </View>
     </View>
