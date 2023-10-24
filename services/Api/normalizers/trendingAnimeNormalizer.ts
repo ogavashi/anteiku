@@ -1,7 +1,7 @@
-import { FeaturedAnime } from "../../common/types";
+import { FeaturedAnime } from "../../../common/types";
 
-export const featuredNormalizer = (rawData: any): FeaturedAnime[] => {
-  const normalized = rawData.map((raw: any) => ({
+export const trendingAnimeNormalizer = (rawData: any): FeaturedAnime[] => {
+  const normalized = rawData.data.map((raw: any) => ({
     id: raw.id,
     type: raw.type,
     title:

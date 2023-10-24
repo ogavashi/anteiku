@@ -1,1 +1,1 @@
-export const BASE_URL = "https://kitsu.io/api/edge/";
+export const config = { BASE_URL: "https://kitsu.io/api/edge/" };

@@ -2,15 +2,13 @@ import { Dimensions, View } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { CarouselItem } from "./CarouselItem";
 import { Spinner, Text } from "@ui-kitten/components";
+import { useCallback, useMemo, useState } from "react";
 import { DotsCarousel } from "../../../../components";
-import { useCallback, useState } from "react";
 import { useFetch } from "../../../../hooks";
-import { FeaturedAnime } from "../../../../common/types";
-import { featured_anime_url } from "../../../../api";
-import { featuredNormalizer } from "../../../../api";
-import { Error } from "../../../../features/error";
+import { Error } from "../../../error";
+import { ApiService } from "../../../../services";
 
-export const FeaturedCarousel = () => {
+export const FeaturedAnimeCarousel = () => {
   const width = Dimensions.get("window").width;
   const [index, setIndex] = useState<number>(0);
 
@@ -18,7 +16,9 @@ export const FeaturedCarousel = () => {
     setIndex(index);
   }, []);
 
-  const { data, error } = useFetch<FeaturedAnime[]>(featured_anime_url, featuredNormalizer);
+  const api = useMemo(() => ApiService().trending.getAllAnime, []);
+
+  const { data, error } = useFetch(api, "trendingAnime");
 
   return (
     <View
@@ -29,7 +29,7 @@ export const FeaturedCarousel = () => {
       }}
     >
       <Text category="h3" style={{ marginHorizontal: 10 }}>
-        Featured
+        Featured anime
       </Text>
 
       {error ? (
@@ -41,7 +41,7 @@ export const FeaturedCarousel = () => {
             justifyContent: "center",
             alignItems: "center",
             gap: 10,
-            minHeight: 200,
+            minHeight: 220,
           }}
         >
           {!data ? (

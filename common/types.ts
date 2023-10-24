@@ -40,3 +40,12 @@ export type FeaturedAnime = {
   showType: string;
   year: string;
 };
+
+export type FeaturedManga = {
+  id: string;
+  type: string;
+  title: string;
+  image: string;
+  mangaType: string;
+  year: string;
+};

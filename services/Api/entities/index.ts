@@ -1,0 +1,1 @@
+export { Trending } from "./Trending";

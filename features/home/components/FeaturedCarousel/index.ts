@@ -1,1 +1,0 @@
-export { FeaturedCarousel } from "./FeaturedCarousel";

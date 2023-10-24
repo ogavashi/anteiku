@@ -5,7 +5,7 @@ interface State<T> {
   error?: Error;
 }
 
-type Cache<T> = { [url: string]: T };
+type Cache<T> = { [key: string]: T };
 
 // discriminated union type
 type Action<T> =
@@ -13,13 +13,7 @@ type Action<T> =
   | { type: "fetched"; payload: T }
   | { type: "error"; payload: Error };
 
-type Normalizer<T> = (rawData: any) => T;
-
-export function useFetch<T = unknown>(
-  url?: string,
-  normalizer?: Normalizer<T>,
-  options?: RequestInit
-): State<T> {
+export function useFetch<T = unknown>(api: () => Promise<T>, key: string): State<T> {
   const cache = useRef<Cache<T>>({});
 
   // Used to prevent state update if the component is unmounted
@@ -47,31 +41,21 @@ export function useFetch<T = unknown>(
   const [state, dispatch] = useReducer(fetchReducer, initialState);
 
   useEffect(() => {
-    // Do nothing if the url is not given
-    if (!url) return;
-
     cancelRequest.current = false;
 
     const fetchData = async () => {
       dispatch({ type: "loading" });
 
       // If a cache exists for this url, return it
-      if (cache.current[url]) {
-        dispatch({ type: "fetched", payload: cache.current[url] });
+      if (cache.current[key]) {
+        dispatch({ type: "fetched", payload: cache.current[key] });
         return;
       }
 
       try {
-        const response = await fetch(url, options);
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
+        const data = await api();
 
-        const { data: rawData } = await response.json();
-
-        const data = normalizer ? normalizer(rawData) : (rawData as T);
-
-        cache.current[url] = data;
+        cache.current[key] = data;
         if (cancelRequest.current) return;
 
         dispatch({ type: "fetched", payload: data });
@@ -91,7 +75,7 @@ export function useFetch<T = unknown>(
     return () => {
       cancelRequest.current = true;
     };
-  }, [url]);
+  }, [key]);
 
   return state;
 }
