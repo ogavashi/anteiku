@@ -1,1 +1,1 @@
-export { FeaturedAnimeCarousel, FeaturedMangaCarousel } from "./components";
+export { FeaturedAnimeCarousel, FeaturedMangaCarousel, HorizonatalListAnime } from "./components";
