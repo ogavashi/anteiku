@@ -1,11 +1,11 @@
 import { Divider, Layout, TopNavigation, Button } from "@ui-kitten/components";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { HomeScreenProps, ProfileScreenProps } from "../../common/types";
+import { ProfileScreenProps } from "../../common/types";
 import { useCallback } from "react";
 
 export const Library: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const navigateHome = useCallback(() => {
-    navigation.navigate("Home");
+    navigation.navigate("HomeStack");
   }, []);
 
   return (

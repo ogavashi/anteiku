@@ -15,7 +15,7 @@ export type AppStackParamsList = {
 };
 
 export type TabParamList = {
-  Home: undefined;
+  HomeStack: undefined;
   Library: undefined;
 };
 
@@ -28,7 +28,10 @@ export type AuthStackParamList = {
   };
 };
 
-export type HomeScreenProps = BottomTabScreenProps<TabParamList, "Home">;
+export type HomeStackParamsList = {
+  Home: undefined;
+  List: undefined;
+};
 
 export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Library">;
 

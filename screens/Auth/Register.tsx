@@ -8,7 +8,7 @@ export const Register: React.FC<StackScreenProps<AuthStackParamList, "Register">
   navigation,
 }) => {
   const handleRegister = useCallback(() => {
-    navigation.navigate("App", { screen: "Home" });
+    navigation.navigate("App", { screen: "HomeStack" });
   }, []);
 
   return (
