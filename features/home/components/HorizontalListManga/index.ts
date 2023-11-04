@@ -1,0 +1,1 @@
+export { HorizontalListManga } from "./HorizontalListManga";

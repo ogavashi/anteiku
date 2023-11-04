@@ -56,3 +56,10 @@ export type Anime = {
   poster: string;
   showType: string;
 };
+
+export type Manga = {
+  id: string;
+  title: string;
+  poster: string;
+  mangaType: string;
+};

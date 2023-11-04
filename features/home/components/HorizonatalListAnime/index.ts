@@ -1,1 +1,0 @@
-export { HorizonatalListAnime } from "./HorizontalListAnime";

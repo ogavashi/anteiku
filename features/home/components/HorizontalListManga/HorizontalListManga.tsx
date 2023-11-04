@@ -1,19 +1,17 @@
 import { Spinner, Text } from "@ui-kitten/components";
 import { FlatList, View } from "react-native";
 import { ListItem } from "./ListItem";
-import { useMemo } from "react";
-import { ApiService } from "../../../../services";
 import { useFetch } from "../../../../hooks";
 import { Error } from "../../../error";
-import { Anime } from "../../../../common/types";
+import { Manga } from "../../../../common/types";
 
-interface HorizonatalListAnimeProps {
+interface HorizontalListMangaProps {
   title: string;
-  api: () => Promise<Anime[]>;
+  api: () => Promise<Manga[]>;
 }
 
-export const HorizonatalListAnime: React.FC<HorizonatalListAnimeProps> = ({ title, api }) => {
-  const { data, error } = useFetch(api, "ongoingAnime");
+export const HorizontalListManga: React.FC<HorizontalListMangaProps> = ({ title, api }) => {
+  const { data, error } = useFetch(api, "ongoingManga");
 
   return (
     <View
@@ -45,7 +43,7 @@ export const HorizonatalListAnime: React.FC<HorizonatalListAnimeProps> = ({ titl
           centerContent
           horizontal
           data={data}
-          renderItem={({ item }) => <ListItem anime={item} />}
+          renderItem={({ item }) => <ListItem manga={item} />}
           keyExtractor={({ id }) => id}
           contentContainerStyle={{ paddingBottom: 10 }}
         />
