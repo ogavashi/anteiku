@@ -1,3 +1,4 @@
+import { MangaList } from "./../screens/List/MangaList";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 export type Theme = "light" | "dark" | "automatic";
@@ -30,39 +31,28 @@ export type AuthStackParamList = {
 
 export type HomeStackParamsList = {
   Home: undefined;
-  List: undefined;
+  AnimeList: { title: string };
+  MangaList: undefined;
 };
 
 export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Library">;
 
-export type FeaturedAnime = {
-  id: string;
-  type: string;
-  title: string;
-  image: string;
-  showType: string;
-  year: string;
-};
-
-export type FeaturedManga = {
-  id: string;
-  type: string;
-  title: string;
-  image: string;
-  mangaType: string;
-  year: string;
-};
-
 export type Anime = {
   id: string;
-  title: string;
   poster: string;
+  type: string;
+  title: string;
+  image: string;
   showType: string;
+  year: string;
 };
 
 export type Manga = {
   id: string;
-  title: string;
   poster: string;
+  type: string;
+  title: string;
+  image: string;
   mangaType: string;
+  year: string;
 };

@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Library } from "../../../../screens";
+import { Library } from "../../../../screens";
 import { BottomTabBar } from "../../components/BottomTabBar";
 import { TabParamList } from "../../../../common/types";
 import { HomeNavigator } from "../HomeNavigator";

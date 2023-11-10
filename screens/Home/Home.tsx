@@ -18,14 +18,19 @@ export const Home: React.FC<StackScreenProps<HomeStackParamsList, "Home">> = ({ 
     [ApiService]
   );
 
-  const goList = () => {
-    navigation.navigate("List");
+  const goAnimeList = () => {
+    navigation.navigate("AnimeList", { title: "Anime List" });
+  };
+
+  const goMangaList = () => {
+    navigation.navigate("MangaList");
   };
 
   return (
     <ScrollLayout>
       <View style={{ display: "flex", gap: 20 }}>
-        <Button onPress={goList}>List</Button>
+        <Button onPress={goAnimeList}>List Anime</Button>
+        <Button onPress={goMangaList}>List Manga</Button>
         <FeaturedAnimeCarousel />
         <HorizontalListAnime title="Ongoing anime" api={ongoingApi.anime} />
         <FeaturedMangaCarousel />

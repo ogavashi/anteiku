@@ -1,6 +1,6 @@
-import { FeaturedAnime } from "../../../common/types";
+import { Anime } from "../../../common/types";
 
-export const animeNormalizer = (rawData: any): FeaturedAnime[] => {
+export const animeNormalizer = (rawData: any): Anime[] => {
   const normalized = rawData.data.map((raw: any) => ({
     id: raw.id,
     type: raw.type,

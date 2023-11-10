@@ -1,7 +1,7 @@
-import { FeaturedManga } from "../../../common/types";
+import { Manga } from "../../../common/types";
 
-export const mangaNormalizer = (rawData: any): FeaturedManga[] => {
-  const normalized: FeaturedManga[] = rawData.data.map((raw: any) => ({
+export const mangaNormalizer = (rawData: any): Manga[] => {
+  const normalized: Manga[] = rawData.data.map((raw: any) => ({
     id: raw.id,
     type: raw.type,
     title:

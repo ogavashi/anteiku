@@ -1,10 +1,9 @@
 import { Text } from "@ui-kitten/components";
 import { Image, View } from "react-native";
-import { useAppTheme } from "../../../../hooks";
-import { FeaturedManga } from "../../../../common/types";
+import { Manga } from "../../../../common/types";
 
 interface CarouselItemProps {
-  item: FeaturedManga;
+  item: Manga;
 }
 
 export const CarouselItem: React.FC<CarouselItemProps> = ({ item }) => {
