@@ -1,4 +1,2 @@
-export { trendingAnimeNormalizer } from "./trendingAnimeNormalizer";
-export { trendingMangaNormalizer } from "./trendingMangaNormalizer";
-export { ongoingAnimeNormalizer } from "./ongoingAnimeNormalizer";
-export { ongoingMangaNormalizer } from "./ongoingMangaNormalizer";
+export { animeNormalizer } from "./animeNormalizer";
+export { mangaNormalizer } from "./mangaNormalizer";

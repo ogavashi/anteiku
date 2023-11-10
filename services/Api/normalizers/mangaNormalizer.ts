@@ -1,6 +1,6 @@
 import { FeaturedManga } from "../../../common/types";
 
-export const trendingMangaNormalizer = (rawData: any): FeaturedManga[] => {
+export const mangaNormalizer = (rawData: any): FeaturedManga[] => {
   const normalized: FeaturedManga[] = rawData.data.map((raw: any) => ({
     id: raw.id,
     type: raw.type,
@@ -13,6 +13,7 @@ export const trendingMangaNormalizer = (rawData: any): FeaturedManga[] => {
     image: raw.attributes.coverImage?.original || raw.attributes.posterImage?.original,
     mangaType: raw.attributes.mangaType,
     year: new Date(raw.attributes.endDate || raw.attributes.startDate).getFullYear(),
+    poster: raw.attributes.posterImage.original,
   }));
 
   return normalized;

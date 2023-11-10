@@ -1,16 +1,16 @@
 import { AxiosInstance } from "axios";
-import { trendingAnimeNormalizer, trendingMangaNormalizer } from "../normalizers";
+import { animeNormalizer, mangaNormalizer } from "../normalizers";
 
 export const Trending = (instance: AxiosInstance) => ({
   async getAllAnime() {
     const { data: rawData } = await instance.get("/trending/anime");
 
-    return trendingAnimeNormalizer(rawData);
+    return animeNormalizer(rawData);
   },
 
   async getAllManga() {
     const { data: rawData } = await instance.get("/trending/manga");
 
-    return trendingMangaNormalizer(rawData);
+    return mangaNormalizer(rawData);
   },
 });

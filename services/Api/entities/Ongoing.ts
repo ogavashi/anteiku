@@ -1,11 +1,11 @@
 import { AxiosInstance } from "axios";
-import { ongoingAnimeNormalizer, ongoingMangaNormalizer } from "../normalizers";
+import { animeNormalizer, mangaNormalizer } from "../normalizers";
 
 export const Ongoing = (instance: AxiosInstance) => ({
   async getAllAnime() {
     const { data: rawData } = await instance.get("anime?filter[status]=current");
 
-    return ongoingAnimeNormalizer(rawData);
+    return animeNormalizer(rawData);
   },
 
   async getAllManga() {
@@ -13,6 +13,6 @@ export const Ongoing = (instance: AxiosInstance) => ({
       "manga?filter[status]=current&page[limit]=20&page[offset]=0"
     );
 
-    return ongoingMangaNormalizer(rawData);
+    return mangaNormalizer(rawData);
   },
 });
