@@ -9,32 +9,24 @@ import {
 } from "../../features/home";
 import { useMemo } from "react";
 import { ApiService } from "../../services";
-import { Button } from "@ui-kitten/components";
 import { StackScreenProps } from "@react-navigation/stack";
 
-export const Home: React.FC<StackScreenProps<HomeStackParamsList, "Home">> = ({ navigation }) => {
+export const Home: React.FC<StackScreenProps<HomeStackParamsList, "Home">> = () => {
   const ongoingApi = useMemo(
-    () => ({ anime: ApiService().ongoing.getAllAnime, manga: ApiService().ongoing.getAllManga }),
+    () => ({
+      ongoingAnime: ApiService().ongoing.getAllAnime,
+      ongoingManga: ApiService().ongoing.getAllManga,
+    }),
     [ApiService]
   );
-
-  const goAnimeList = () => {
-    navigation.navigate("AnimeList", { title: "Anime List" });
-  };
-
-  const goMangaList = () => {
-    navigation.navigate("MangaList");
-  };
 
   return (
     <ScrollLayout>
       <View style={{ display: "flex", gap: 20 }}>
-        <Button onPress={goAnimeList}>List Anime</Button>
-        <Button onPress={goMangaList}>List Manga</Button>
         <FeaturedAnimeCarousel />
-        <HorizontalListAnime title="Ongoing anime" api={ongoingApi.anime} />
+        <HorizontalListAnime title="Ongoing anime" api={ongoingApi.ongoingAnime} />
         <FeaturedMangaCarousel />
-        <HorizontalListManga title="Ongoing manga" api={ongoingApi.manga} />
+        <HorizontalListManga title="Ongoing manga" api={ongoingApi.ongoingManga} />
       </View>
     </ScrollLayout>
   );

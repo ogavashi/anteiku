@@ -6,4 +6,5 @@ export {
   CloseIcon,
   SettingsIcon,
   AlertIcon,
+  RightIcon,
 } from "./components";

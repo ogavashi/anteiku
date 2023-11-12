@@ -1,4 +1,3 @@
-import { MangaList } from "./../screens/List/MangaList";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 export type Theme = "light" | "dark" | "automatic";
@@ -32,7 +31,7 @@ export type AuthStackParamList = {
 export type HomeStackParamsList = {
   Home: undefined;
   AnimeList: { title: string };
-  MangaList: undefined;
+  MangaList: { title: string };
 };
 
 export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Library">;

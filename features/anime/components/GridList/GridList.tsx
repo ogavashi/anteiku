@@ -50,7 +50,6 @@ export const GridList = () => {
       data={data}
       numColumns={2}
       centerContent
-      contentContainerStyle={{ paddingVertical: 10 }}
       renderItem={({ item }) => <Item item={item} />}
     />
   );

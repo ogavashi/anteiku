@@ -1,6 +1,7 @@
 import { Text } from "@ui-kitten/components";
 import { Image, View } from "react-native";
 import { Anime } from "../../../../common/types";
+import TextTicker from "react-native-text-ticker";
 
 interface CarouselItemProps {
   item: Anime;
@@ -43,9 +44,11 @@ export const CarouselItem: React.FC<CarouselItemProps> = ({ item }) => {
             justifyContent: "flex-start",
           }}
         >
-          <Text category="h6" style={{ color: "white" }}>
-            {item.title}
-          </Text>
+          <TextTicker style={{ fontSize: 24 }} duration={6000} loop bounce marqueeDelay={1000}>
+            <Text category="h6" style={{ color: "white" }}>
+              {item.title}
+            </Text>
+          </TextTicker>
           <Text style={{ opacity: 0.8, color: "white" }}>
             {item.showType}, {item.year}
           </Text>

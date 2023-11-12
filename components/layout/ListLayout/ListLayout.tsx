@@ -29,7 +29,7 @@ export const ListLayout: React.FC<React.PropsWithChildren<ListLayoutProps>> = ({
           accessoryLeft={() => <TopActions icon={BackIcon} navigate={navigateBack} />}
         />
         <Divider />
-        <View style={{ height: "100%" }}>{children}</View>
+        <View style={{ height: "100%", paddingVertical: 10 }}>{children}</View>
       </SafeAreaView>
     </Layout>
   );

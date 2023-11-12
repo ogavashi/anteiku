@@ -1,11 +1,17 @@
-import { Layout, Button } from "@ui-kitten/components";
 import { HomeStackParamsList } from "../../common/types";
 import { StackScreenProps } from "@react-navigation/stack";
+import { ListLayout } from "../../components/layout";
+import { GridList } from "../../features/anime";
 
-export const MangaList: React.FC<StackScreenProps<HomeStackParamsList, "MangaList">> = ({ navigation }) => {
+export const MangaList: React.FC<StackScreenProps<HomeStackParamsList, "MangaList">> = ({
+  navigation,
+  route,
+}) => {
+  const { title } = route.params;
+
   return (
-    <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Button onPress={() => {}}>Go Home</Button>
-    </Layout>
+    <ListLayout title={title}>
+      <GridList />
+    </ListLayout>
   );
 };

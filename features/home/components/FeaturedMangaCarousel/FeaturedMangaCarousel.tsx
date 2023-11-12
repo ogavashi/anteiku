@@ -1,16 +1,20 @@
 import { Dimensions, View } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { CarouselItem } from "./CarouselItem";
-import { Spinner, Text } from "@ui-kitten/components";
+import { Button, Spinner, Text } from "@ui-kitten/components";
 import { useCallback, useMemo, useState } from "react";
 import { DotsCarousel } from "../../../../components";
 import { useFetch } from "../../../../hooks";
 import { Error } from "../../../error";
 import { ApiService } from "../../../../services";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { HomeStackParamsList } from "../../../../common/types";
 
 export const FeaturedMangaCarousel = () => {
   const width = Dimensions.get("window").width;
   const [index, setIndex] = useState<number>(0);
+
+  const navigation = useNavigation<NavigationProp<HomeStackParamsList>>();
 
   const handleIndex = useCallback((index: number) => {
     setIndex(index);
@@ -18,7 +22,11 @@ export const FeaturedMangaCarousel = () => {
 
   const api = useMemo(() => ApiService().trending.getAllManga, []);
 
-  const { data, error } = useFetch(api, "trendingAnime");
+  const { data, error } = useFetch(api, "trendingManga");
+
+  const handleShowMore = useCallback(() => {
+    navigation.navigate("AnimeList", { title: "Featured manga" });
+  }, []);
 
   return (
     <View
@@ -28,9 +36,20 @@ export const FeaturedMangaCarousel = () => {
         width: "100%",
       }}
     >
-      <Text category="h3" style={{ marginHorizontal: 10 }}>
-        Featured manga
-      </Text>
+      <View
+        style={{
+          marginHorizontal: 10,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Text category="h3">Featured manga</Text>
+        <Button appearance="ghost" onPress={handleShowMore}>
+          Show all
+        </Button>
+      </View>
 
       {error ? (
         <Error message={error.message} />
