@@ -2,10 +2,10 @@ import { Layout, Text } from "@ui-kitten/components";
 import React, { memo } from "react";
 import { Image, TouchableHighlight, View } from "react-native";
 import TextTicker from "react-native-text-ticker";
-import { Anime } from "../../../../common/types";
+import { Manga } from "../../../../common/types";
 
 interface ItemProps {
-  item: Anime;
+  item: Manga;
 }
 
 export const Item: React.FC<ItemProps> = memo(({ item }) => {
@@ -29,7 +29,7 @@ export const Item: React.FC<ItemProps> = memo(({ item }) => {
           <View>
             <TextTicker style={{ fontSize: 24 }} duration={6000} loop bounce marqueeDelay={1000}>
               <Text category="h6">
-                {item.title}, {item.showType}
+                {item.title}, {item.mangaType}
               </Text>
             </TextTicker>
           </View>

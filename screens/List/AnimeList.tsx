@@ -6,11 +6,11 @@ import { ListLayout } from "../../components/layout";
 export const AnimeList: React.FC<StackScreenProps<HomeStackParamsList, "AnimeList">> = ({
   route,
 }) => {
-  const { title } = route.params;
+  const { title, ...props } = route.params;
 
   return (
     <ListLayout title={title}>
-      <GridList />
+      <GridList {...props} />
     </ListLayout>
   );
 };

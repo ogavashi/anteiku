@@ -24,9 +24,17 @@ export const Home: React.FC<StackScreenProps<HomeStackParamsList, "Home">> = () 
     <ScrollLayout>
       <View style={{ display: "flex", gap: 20 }}>
         <FeaturedAnimeCarousel />
-        <HorizontalListAnime title="Ongoing anime" api={ongoingApi.ongoingAnime} />
+        <HorizontalListAnime
+          title="Ongoing anime"
+          api={ongoingApi.ongoingAnime}
+          apiKey="ongoingAnime"
+        />
         <FeaturedMangaCarousel />
-        <HorizontalListManga title="Ongoing manga" api={ongoingApi.ongoingManga} />
+        <HorizontalListManga
+          title="Ongoing manga"
+          api={ongoingApi.ongoingManga}
+          apiKey="ongoingManga"
+        />
       </View>
     </ScrollLayout>
   );

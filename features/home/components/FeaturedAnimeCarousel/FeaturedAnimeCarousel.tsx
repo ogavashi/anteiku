@@ -3,9 +3,8 @@ import Carousel from "react-native-reanimated-carousel";
 import { CarouselItem } from "./CarouselItem";
 import { Button, Spinner, Text } from "@ui-kitten/components";
 import { useCallback, useMemo, useState } from "react";
-import { DotsCarousel } from "../../../../components";
+import { DotsCarousel, Error } from "../../../../components";
 import { useFetch } from "../../../../hooks";
-import { Error } from "../../../error";
 import { ApiService } from "../../../../services";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { HomeStackParamsList } from "../../../../common/types";
@@ -25,7 +24,7 @@ export const FeaturedAnimeCarousel = () => {
   const { data, error } = useFetch(api, "trendingAnime");
 
   const handleShowMore = useCallback(() => {
-    navigation.navigate("AnimeList", { title: "Featured anime" });
+    navigation.navigate("AnimeList", { title: "Featured anime", apiKey: "featuredAnime" });
   }, []);
 
   return (
@@ -52,7 +51,7 @@ export const FeaturedAnimeCarousel = () => {
       </View>
 
       {error ? (
-        <Error message={error.message} />
+        <Error height={200} message={error.message} />
       ) : (
         <View
           style={{

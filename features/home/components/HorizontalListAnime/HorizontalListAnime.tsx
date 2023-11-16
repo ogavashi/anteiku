@@ -2,23 +2,24 @@ import { Button, Spinner, Text } from "@ui-kitten/components";
 import { FlatList, View } from "react-native";
 import { ListItem } from "./ListItem";
 import { useFetch } from "../../../../hooks";
-import { Error } from "../../../error";
 import { Anime, HomeStackParamsList } from "../../../../common/types";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
+import { Error } from "../../../../components";
 
 interface HorizontalListAnimeProps {
   title: string;
   api: () => Promise<Anime[]>;
+  apiKey: string;
 }
 
-export const HorizontalListAnime: React.FC<HorizontalListAnimeProps> = ({ title, api }) => {
-  const { data, error } = useFetch(api, "ongoingAnime");
+export const HorizontalListAnime: React.FC<HorizontalListAnimeProps> = ({ title, api, apiKey }) => {
+  const { data, error } = useFetch(api, apiKey);
 
   const navigation = useNavigation<NavigationProp<HomeStackParamsList>>();
 
   const handleShowMore = useCallback(() => {
-    navigation.navigate("AnimeList", { title });
+    navigation.navigate("AnimeList", { title, apiKey });
   }, []);
 
   return (
@@ -44,7 +45,7 @@ export const HorizontalListAnime: React.FC<HorizontalListAnimeProps> = ({ title,
         </Button>
       </View>
       {error ? (
-        <Error message={error.message} />
+        <Error height={200} message={error.message} />
       ) : !data ? (
         <View
           style={{

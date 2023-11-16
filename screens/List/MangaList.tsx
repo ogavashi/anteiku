@@ -1,17 +1,16 @@
 import { HomeStackParamsList } from "../../common/types";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ListLayout } from "../../components/layout";
-import { GridList } from "../../features/anime";
+import { GridList } from "../../features/manga";
 
 export const MangaList: React.FC<StackScreenProps<HomeStackParamsList, "MangaList">> = ({
-  navigation,
   route,
 }) => {
-  const { title } = route.params;
+  const { title, ...props } = route.params;
 
   return (
     <ListLayout title={title}>
-      <GridList />
+      <GridList {...props} />
     </ListLayout>
   );
 };

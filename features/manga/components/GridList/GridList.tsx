@@ -1,7 +1,6 @@
 import { FlatList } from "react-native";
 import { Item } from "./Item";
 import { useFetch } from "../../../../hooks";
-import { Anime } from "../../../../common/types";
 import { Error, Loader } from "../../../../components";
 import { useMemo } from "react";
 import { getApi } from "../../lib";
@@ -17,7 +16,7 @@ export const GridList: React.FC<GridLisProps> = ({ apiKey }) => {
     return <Error message="Something went wrong" />;
   }
 
-  const { data, error } = useFetch(api as unknown as () => Promise<Anime[]>, apiKey);
+  const { data, error } = useFetch(api, apiKey);
 
   if (!data && !error) {
     return <Loader />;

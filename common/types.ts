@@ -30,8 +30,8 @@ export type AuthStackParamList = {
 
 export type HomeStackParamsList = {
   Home: undefined;
-  AnimeList: { title: string };
-  MangaList: { title: string };
+  AnimeList: { title: string; apiKey: string };
+  MangaList: { title: string; apiKey: string };
 };
 
 export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Library">;
