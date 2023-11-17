@@ -1,8 +1,10 @@
 import { useEffect, useReducer, useRef } from "react";
+import { Query } from "../common/types";
 
 interface State<T> {
   data?: T;
   error?: Error;
+  isLoading: boolean;
 }
 
 type Cache<T> = { [key: string]: T };
@@ -13,7 +15,13 @@ type Action<T> =
   | { type: "fetched"; payload: T }
   | { type: "error"; payload: Error };
 
-export function useFetch<T = unknown>(api: () => Promise<T>, key: string): State<T> {
+export function useFetch<T = unknown>(
+  api: (query?: Query) => Promise<T>,
+  key: string,
+  query?: Query,
+  // Fix later
+  pageInfo?: any
+): State<T> {
   const cache = useRef<Cache<T>>({});
 
   // Used to prevent state update if the component is unmounted
@@ -22,17 +30,18 @@ export function useFetch<T = unknown>(api: () => Promise<T>, key: string): State
   const initialState: State<T> = {
     error: undefined,
     data: undefined,
+    isLoading: false,
   };
 
   // Keep state logic separated
   const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
     switch (action.type) {
       case "loading":
-        return { ...initialState };
+        return { ...initialState, data: state.data, isLoading: true };
       case "fetched":
-        return { ...initialState, data: action.payload };
+        return { ...initialState, data: action.payload, isLoading: false };
       case "error":
-        return { ...initialState, error: action.payload };
+        return { ...initialState, error: action.payload, isLoading: false };
       default:
         return state;
     }
@@ -44,21 +53,29 @@ export function useFetch<T = unknown>(api: () => Promise<T>, key: string): State
     cancelRequest.current = false;
 
     const fetchData = async () => {
+      const cacheKey = pageInfo ? key + pageInfo["page[offset]"] : key;
+
       dispatch({ type: "loading" });
 
       // If a cache exists for this url, return it
-      if (cache.current[key]) {
-        dispatch({ type: "fetched", payload: cache.current[key] });
+      if (cache.current[cacheKey]) {
+        dispatch({ type: "fetched", payload: cache.current[cacheKey] });
         return;
       }
 
       try {
-        const data = await api();
+        const data = await api({ ...query, ...pageInfo });
 
-        cache.current[key] = data;
+        cache.current[cacheKey] = data;
         if (cancelRequest.current) return;
 
-        dispatch({ type: "fetched", payload: data });
+        let payload = data as T;
+
+        if (pageInfo && state.data) {
+          payload = [...(state.data as T[]), ...(data as T[])] as T;
+        }
+
+        dispatch({ type: "fetched", payload });
       } catch (error) {
         console.log("error", error);
 
@@ -75,7 +92,7 @@ export function useFetch<T = unknown>(api: () => Promise<T>, key: string): State
     return () => {
       cancelRequest.current = true;
     };
-  }, [key]);
+  }, [key, query, pageInfo]);
 
   return state;
 }

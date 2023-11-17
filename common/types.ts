@@ -55,3 +55,9 @@ export type Manga = {
   mangaType: string;
   year: string;
 };
+
+export type Query = {
+  [key in string]: string | number;
+};
+
+export type Loading = "main" | "bottom" | "top" | false;
