@@ -7,7 +7,7 @@ export const Trending = (instance: AxiosInstance) => ({
     const { data: rawData } = await instance.get("/trending/anime", { params: query });
 
     return {
-      data: animeNormalizer(rawData),
+      data: await animeNormalizer(rawData),
       meta: {
         count: rawData?.meta?.count,
         hasNext: rawData?.links?.next,

@@ -1,0 +1,1 @@
+export { useGenreslice } from "./genresSlice";

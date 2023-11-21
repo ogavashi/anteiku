@@ -10,7 +10,7 @@ export const Ongoing = (instance: AxiosInstance) => ({
     });
 
     return {
-      data: animeNormalizer(rawData),
+      data: await animeNormalizer(rawData),
       meta: {
         count: rawData?.meta?.count,
         hasNext: rawData?.links?.next,

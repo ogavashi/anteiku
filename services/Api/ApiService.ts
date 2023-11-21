@@ -1,10 +1,11 @@
 import axios from "axios";
 import { config } from "../../common/config";
-import { Ongoing, Trending } from "./entities";
+import { Genres, Ongoing, Trending } from "./entities";
 
 type ApiServiceReturnType = {
   trending: ReturnType<typeof Trending>;
   ongoing: ReturnType<typeof Ongoing>;
+  genres: ReturnType<typeof Genres>;
 };
 
 export const ApiService = (): ApiServiceReturnType => {
@@ -15,6 +16,7 @@ export const ApiService = (): ApiServiceReturnType => {
   const entities = {
     trending: Trending,
     ongoing: Ongoing,
+    genres: Genres,
   };
 
   const apis = Object.entries(entities).reduce((prev, [key, f]) => {

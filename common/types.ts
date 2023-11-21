@@ -7,6 +7,11 @@ export interface AppSlice {
   setTheme: (theme: Theme) => void;
 }
 
+export interface GenresSlice {
+  genres: Genre[];
+  setGenres: (genres: Genre[]) => void;
+}
+
 export type AppStackParamsList = {
   App: undefined;
   Auth: undefined;
@@ -44,6 +49,7 @@ export type Anime = {
   image: string;
   showType: string;
   year: string;
+  genres: string[];
 };
 
 export type Manga = {
@@ -68,8 +74,10 @@ export type PageInfo = {
 export type Loading = "main" | "next" | "refresh" | false;
 
 export type Meta = {
-  hasNext: boolean;
+  hasNext: boolean | string;
   count: number;
 };
 
 export type Response<T> = { data: T; meta?: Meta };
+
+export type Genre = { id: string; name: string };
