@@ -1,17 +1,29 @@
-import { Query } from "./../../../common/types";
+import { Anime, Response, Query, Manga } from "./../../../common/types";
 import { AxiosInstance } from "axios";
 import { animeNormalizer, mangaNormalizer } from "../normalizers";
 
 export const Trending = (instance: AxiosInstance) => ({
-  async getAllAnime(query?: Query) {
+  async getAllAnime(query?: Query): Promise<Response<Anime[]>> {
     const { data: rawData } = await instance.get("/trending/anime", { params: query });
 
-    return animeNormalizer(rawData);
+    return {
+      data: animeNormalizer(rawData),
+      meta: {
+        count: rawData?.meta?.count,
+        hasNext: rawData?.links?.next,
+      },
+    };
   },
 
-  async getAllManga() {
-    const { data: rawData } = await instance.get("/trending/manga");
+  async getAllManga(query?: Query): Promise<Response<Manga[]>> {
+    const { data: rawData } = await instance.get("/trending/manga", { params: query });
 
-    return mangaNormalizer(rawData);
+    return {
+      data: mangaNormalizer(rawData),
+      meta: {
+        count: rawData?.meta?.count,
+        hasNext: rawData?.link?.next,
+      },
+    };
   },
 });

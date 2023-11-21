@@ -2,14 +2,14 @@ import { Button, Spinner, Text } from "@ui-kitten/components";
 import { FlatList, View } from "react-native";
 import { ListItem } from "./ListItem";
 import { useFetch } from "../../../../hooks";
-import { Anime, HomeStackParamsList } from "../../../../common/types";
+import { Anime, HomeStackParamsList, Response } from "../../../../common/types";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
 import { Error } from "../../../../components";
 
 interface HorizontalListAnimeProps {
   title: string;
-  api: () => Promise<Anime[]>;
+  api: () => Promise<Response<Anime[]>>;
   apiKey: string;
 }
 

@@ -60,4 +60,16 @@ export type Query = {
   [key in string]: string | number;
 };
 
-export type Loading = "main" | "bottom" | "top" | false;
+export type PageInfo = {
+  "page[limit]": number;
+  "page[offset]": number;
+};
+
+export type Loading = "main" | "next" | "refresh" | false;
+
+export type Meta = {
+  hasNext: boolean;
+  count: number;
+};
+
+export type Response<T> = { data: T; meta?: Meta };

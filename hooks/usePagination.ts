@@ -1,9 +1,10 @@
 import { useCallback, useState } from "react";
+import { PageInfo } from "../common/types";
 
-const default_data = { "page[limit]": 20, "page[offset]": 0 };
+const default_data = { "page[limit]": 10, "page[offset]": 0 };
 
-export const usePagination = () => {
-  const [paginationData, setPaginationData] = useState(default_data);
+export const usePagination = (pageInfo?: PageInfo) => {
+  const [paginationData, setPaginationData] = useState(pageInfo || default_data);
 
   const nextPage = useCallback(() => {
     setPaginationData((prev) => ({
@@ -12,9 +13,9 @@ export const usePagination = () => {
     }));
   }, []);
 
-  const resetPagination = () => {
-    setPaginationData(default_data);
-  };
+  const resetPagination = useCallback(() => {
+    setPaginationData({ ...default_data });
+  }, []);
 
   return { paginationData, nextPage, resetPagination };
 };

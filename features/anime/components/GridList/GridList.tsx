@@ -1,6 +1,6 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList } from "react-native";
 import { Item } from "./Item";
-import { useInfiniteScroll } from "../../../../hooks";
+import { useInfiniteScroll, usePagination } from "../../../../hooks";
 import { Error, Loader } from "../../../../components";
 import { useMemo } from "react";
 import { getApi } from "../../lib";
@@ -16,9 +16,9 @@ export const GridList: React.FC<GridLisProps> = ({ apiKey }) => {
     return <Error message="Something went wrong" />;
   }
 
-  const { data, error, isLoading, fetchNext, refresh } = useInfiniteScroll(api, apiKey);
+  const { data, error, isLoading, fetchNext, refresh } = useInfiniteScroll(api);
 
-  if (!data && !error) {
+  if (isLoading === "main") {
     return <Loader />;
   }
 
@@ -33,10 +33,11 @@ export const GridList: React.FC<GridLisProps> = ({ apiKey }) => {
       centerContent
       renderItem={({ item }) => <Item item={item} />}
       onEndReached={fetchNext}
-      onEndReachedThreshold={0.5}
-      // refreshing={isLoading}
-      // onRefresh={refresh}
-      ListFooterComponent={<>{isLoading && <Loader height={100} />}</>}
+      onEndReachedThreshold={0.2}
+      refreshing={isLoading === "refresh"}
+      onRefresh={refresh}
+      contentContainerStyle={{ paddingVertical: 10 }}
+      ListFooterComponent={<>{isLoading === "next" && <Loader height={100} />}</>}
     />
   );
 };
