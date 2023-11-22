@@ -1,42 +1,28 @@
-import axios from "axios";
 import { Anime } from "../../../common/types";
-import { config } from "../../../common/config";
 
-const fetchGenres = async (rawUrl: string) => {
-  const sanitized = rawUrl.split("edge:")[1];
+export const animeNormalizer = (rawData: any): Anime[] => {
+  const normalized = rawData.data.map((raw: any) => {
+    const title = {
+      id: raw.mal_id,
+      type: raw.type,
+      title:
+        raw?.title ||
+        raw?.title_english ||
+        raw.attributes.titles?.jp_jp ||
+        raw?.title_japanese ||
+        "No title",
+      image: raw?.images?.jpg?.large_image_url || raw?.images?.webp?.large_image_ur,
+      score: raw.score,
+      year: raw.aired.prop?.to?.year || raw?.aired.prop?.from?.year,
+      poster: raw?.images?.jpg?.large_image_url || raw?.images?.webp?.large_image_ur,
+      genres: raw?.genres.map((genre: { [key in string]: string }) => ({
+        id: genre.mal_id,
+        name: genre.name,
+      })),
+    };
 
-  const url = sanitized || rawUrl;
-
-  const { data: rawData } = await axios.get(url, { baseURL: config.BASE_URL });
-
-  const normalized: [] = rawData?.data.map((raw: any) => raw.id) || [];
-
-  return normalized;
-};
-
-export const animeNormalizer = async (rawData: any): Promise<Anime[]> => {
-  const normalized = await Promise.all(
-    rawData.data.map(async (raw: any) => {
-      const genres = await fetchGenres(raw.relationships.genres.links.self);
-
-      const title = {
-        id: raw.id,
-        type: raw.type,
-        title:
-          raw.attributes.titles?.en ||
-          raw.attributes.titles?.en_jp ||
-          raw.attributes.titles?.jp_jp ||
-          "No title",
-        image: raw.attributes.coverImage?.original,
-        showType: raw.attributes.showType,
-        year: new Date(raw.attributes.endDate || raw.attributes.startDate).getFullYear(),
-        poster: raw.attributes.posterImage?.original,
-        genres,
-      };
-
-      return title;
-    })
-  );
+    return title;
+  });
 
   return normalized;
 };

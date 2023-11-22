@@ -29,7 +29,7 @@ export const Item: React.FC<ItemProps> = memo(({ item }) => {
           <View>
             <TextTicker style={{ fontSize: 24 }} duration={6000} loop bounce marqueeDelay={1000}>
               <Text category="h6">
-                {item.title}, {item.showType}
+                {item.title}, {item.type}
               </Text>
             </TextTicker>
           </View>

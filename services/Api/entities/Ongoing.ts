@@ -5,15 +5,15 @@ import { Anime, Manga, Response } from "../../../common/types";
 
 export const Ongoing = (instance: AxiosInstance) => ({
   async getAllAnime(query?: Query): Promise<Response<Anime[]>> {
-    const { data: rawData } = await instance.get("anime?filter[status]=current", {
+    const { data: rawData } = await instance.get("anime?status=airing&order_by=popularity", {
       params: query,
     });
 
     return {
-      data: await animeNormalizer(rawData),
+      data: animeNormalizer(rawData),
       meta: {
-        count: rawData?.meta?.count,
-        hasNext: rawData?.links?.next,
+        count: rawData?.pagination?.items?.count,
+        hasNext: rawData?.pagination?.has_next_page,
       },
     };
   },

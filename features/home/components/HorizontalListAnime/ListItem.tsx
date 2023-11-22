@@ -29,7 +29,7 @@ export const ListItem: React.FC<ListItem> = memo(({ anime }) => {
           <View>
             <TextTicker style={{ fontSize: 24 }} duration={6000} loop bounce marqueeDelay={1000}>
               <Text category="h6">
-                {anime.title}, {anime.showType}
+                {anime.title}, {anime.type}
               </Text>
             </TextTicker>
           </View>
