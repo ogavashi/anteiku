@@ -1,8 +1,8 @@
 import { Button, Spinner, Text } from "@ui-kitten/components";
 import { FlatList, View } from "react-native";
 import { ListItem } from "./ListItem";
-import { useFetch } from "../../../../hooks";
-import { HomeStackParamsList, Manga, Response } from "../../../../common/types";
+import { useFetch, useQuery } from "../../../../hooks";
+import { HomeStackParamsList, Manga, Query, Response } from "../../../../common/types";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useCallback, useMemo } from "react";
 import { Error } from "../../../../components";
@@ -11,10 +11,16 @@ interface HorizontalListMangaProps {
   title: string;
   api: () => Promise<Response<Manga[]>>;
   apiKey: string;
+  defaultQuery?: Query;
 }
 
-export const HorizontalListManga: React.FC<HorizontalListMangaProps> = ({ title, api, apiKey }) => {
-  const query = useMemo(() => ({ "page[limit]": 10, "page[offset]": 30 }), []);
+export const HorizontalListManga: React.FC<HorizontalListMangaProps> = ({
+  title,
+  api,
+  apiKey,
+  defaultQuery,
+}) => {
+  const { query } = useQuery(defaultQuery);
 
   const { data, error } = useFetch(api, apiKey, query);
 

@@ -50,7 +50,7 @@ export const CarouselItem: React.FC<CarouselItemProps> = ({ item }) => {
             </Text>
           </TextTicker>
           <Text style={{ opacity: 0.8, color: "white" }}>
-            {item.showType}, {item.year}
+            {item.type}, {item.year}
           </Text>
         </View>
       </View>

@@ -3,7 +3,6 @@ import { HomeStackParamsList } from "../../common/types";
 import { ScrollLayout } from "../../components";
 import {
   FeaturedAnimeCarousel,
-  FeaturedMangaCarousel,
   HorizontalListAnime,
   HorizontalListManga,
 } from "../../features/home";
@@ -20,21 +19,29 @@ export const Home: React.FC<StackScreenProps<HomeStackParamsList, "Home">> = () 
     [ApiService]
   );
 
+  const queries = useMemo(
+    () => ({
+      ongoing: { limit: 10, order_by: "popularity" },
+    }),
+    []
+  );
+
   return (
     <ScrollLayout>
       <View style={{ display: "flex", gap: 20 }}>
-        {/* <FeaturedAnimeCarousel /> */}
+        <FeaturedAnimeCarousel />
         <HorizontalListAnime
           title="Ongoing anime"
           api={ongoingApi.ongoingAnime}
           apiKey="ongoingAnime"
+          defaultQuery={queries.ongoing}
         />
-        {/* <FeaturedMangaCarousel />
         <HorizontalListManga
           title="Ongoing manga"
           api={ongoingApi.ongoingManga}
           apiKey="ongoingManga"
-        /> */}
+          defaultQuery={queries.ongoing}
+        />
       </View>
     </ScrollLayout>
   );

@@ -47,7 +47,6 @@ export type Anime = {
   type: string;
   title: string;
   image: string;
-  showType: string;
   year: string;
   genres: Genre[];
   score: number;
@@ -59,8 +58,9 @@ export type Manga = {
   type: string;
   title: string;
   image: string;
-  mangaType: string;
   year: string;
+  genres: Genre[];
+  score: number;
 };
 
 export type Query = {

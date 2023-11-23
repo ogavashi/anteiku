@@ -1,8 +1,8 @@
-  import { useCallback, useMemo, useState } from "react";
-  import { Query } from "../common/types";
+import { useState } from "react";
+import { Query } from "../common/types";
 
-  export const useQuery = () => {
-    const [query, setQuery] = useState<Query>({});
+export const useQuery = (defaultQuery?: Query) => {
+  const [query, setQuery] = useState<Query>(defaultQuery || {});
 
-    return { query };
-  };
+  return { query };
+};

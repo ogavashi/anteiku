@@ -5,7 +5,7 @@ import { Anime, Manga, Response } from "../../../common/types";
 
 export const Ongoing = (instance: AxiosInstance) => ({
   async getAllAnime(query?: Query): Promise<Response<Anime[]>> {
-    const { data: rawData } = await instance.get("anime?status=airing&order_by=popularity", {
+    const { data: rawData } = await instance.get("anime?status=airing", {
       params: query,
     });
 
@@ -19,13 +19,13 @@ export const Ongoing = (instance: AxiosInstance) => ({
   },
 
   async getAllManga(query?: Query): Promise<Response<Manga[]>> {
-    const { data: rawData } = await instance.get("manga?filter[status]=current", { params: query });
+    const { data: rawData } = await instance.get("manga?status=publishing", { params: query });
 
     return {
       data: mangaNormalizer(rawData),
       meta: {
-        count: rawData?.meta?.count,
-        hasNext: rawData?.links?.next,
+        count: rawData?.pagination?.items?.count,
+        hasNext: rawData?.pagination?.has_next_page,
       },
     };
   },

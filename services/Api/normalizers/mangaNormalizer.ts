@@ -2,18 +2,17 @@ import { Manga } from "../../../common/types";
 
 export const mangaNormalizer = (rawData: any): Manga[] => {
   const normalized: Manga[] = rawData.data.map((raw: any) => ({
-    id: raw.id,
+    id: raw.mal_id,
     type: raw.type,
-    title:
-      raw.attributes.titles?.en ||
-      raw.attributes.titles?.en_jp ||
-      raw.attributes.titles?.ja_jp ||
-      raw.attributes.titles?.en_us ||
-      "No title",
-    image: raw.attributes.coverImage?.original || raw.attributes.posterImage?.original,
-    mangaType: raw.attributes.mangaType,
-    year: new Date(raw.attributes.endDate || raw.attributes.startDate).getFullYear(),
-    poster: raw.attributes.posterImage.original,
+    title: raw?.title || raw?.title_english || raw?.title_japanese || "No title",
+    image: raw?.images?.jpg?.large_image_url || raw?.images?.webp?.large_image_ur,
+    score: raw.score,
+    year: raw.published.prop?.to?.year || raw?.published.prop?.from?.year,
+    poster: raw?.images?.jpg?.image_url || raw?.images?.webp?.image_ur,
+    genres: raw?.genres.map((genre: { [key in string]: string }) => ({
+      id: genre.mal_id,
+      name: genre.name,
+    })),
   }));
 
   return normalized;

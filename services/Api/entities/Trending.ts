@@ -4,25 +4,25 @@ import { animeNormalizer, mangaNormalizer } from "../normalizers";
 
 export const Trending = (instance: AxiosInstance) => ({
   async getAllAnime(query?: Query): Promise<Response<Anime[]>> {
-    const { data: rawData } = await instance.get("/trending/anime", { params: query });
+    const { data: rawData } = await instance.get("/top/anime", { params: query });
 
     return {
-      data: await animeNormalizer(rawData),
+      data: animeNormalizer(rawData),
       meta: {
-        count: rawData?.meta?.count,
-        hasNext: rawData?.links?.next,
+        count: rawData?.pagination?.items?.count,
+        hasNext: rawData?.pagination?.has_next_page,
       },
     };
   },
 
   async getAllManga(query?: Query): Promise<Response<Manga[]>> {
-    const { data: rawData } = await instance.get("/trending/manga", { params: query });
+    const { data: rawData } = await instance.get("/top/manga", { params: query });
 
     return {
       data: mangaNormalizer(rawData),
       meta: {
-        count: rawData?.meta?.count,
-        hasNext: rawData?.link?.next,
+        count: rawData?.pagination?.items?.count,
+        hasNext: rawData?.pagination?.has_next_page,
       },
     };
   },

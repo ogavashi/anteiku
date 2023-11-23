@@ -1,8 +1,8 @@
 import { Button, Spinner, Text } from "@ui-kitten/components";
 import { FlatList, View } from "react-native";
 import { ListItem } from "./ListItem";
-import { useFetch } from "../../../../hooks";
-import { Anime, HomeStackParamsList, Response } from "../../../../common/types";
+import { useFetch, useQuery } from "../../../../hooks";
+import { Anime, HomeStackParamsList, Query, Response } from "../../../../common/types";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
 import { Error } from "../../../../components";
@@ -11,10 +11,18 @@ interface HorizontalListAnimeProps {
   title: string;
   api: () => Promise<Response<Anime[]>>;
   apiKey: string;
+  defaultQuery?: Query;
 }
 
-export const HorizontalListAnime: React.FC<HorizontalListAnimeProps> = ({ title, api, apiKey }) => {
-  const { data, error } = useFetch(api, apiKey);
+export const HorizontalListAnime: React.FC<HorizontalListAnimeProps> = ({
+  title,
+  api,
+  apiKey,
+  defaultQuery,
+}) => {
+  const { query } = useQuery(defaultQuery);
+
+  const { data, error } = useFetch(api, apiKey, query);
 
   const navigation = useNavigation<NavigationProp<HomeStackParamsList>>();
 
