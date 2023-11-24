@@ -2,6 +2,7 @@ import { Text } from "@ui-kitten/components";
 import { Image, View } from "react-native";
 import { Anime } from "../../../../common/types";
 import TextTicker from "react-native-text-ticker";
+import { Rating } from "../../../../components";
 
 interface CarouselItemProps {
   item: Anime;
@@ -26,6 +27,7 @@ export const CarouselItem: React.FC<CarouselItemProps> = ({ item }) => {
           uri: item.image,
         }}
       />
+      <Rating style={{ position: "absolute", top: 5, right: 5 }} score={item.score} />
       <View
         style={{
           position: "absolute",
@@ -50,7 +52,7 @@ export const CarouselItem: React.FC<CarouselItemProps> = ({ item }) => {
             </Text>
           </TextTicker>
           <Text style={{ opacity: 0.8, color: "white" }}>
-            {item.type}, {item.year}
+            {item.type}, {item.year}, {item.genres[0].name}
           </Text>
         </View>
       </View>

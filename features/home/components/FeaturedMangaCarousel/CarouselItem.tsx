@@ -1,6 +1,7 @@
 import { Text } from "@ui-kitten/components";
 import { Image, View } from "react-native";
 import { Manga } from "../../../../common/types";
+import { Rating } from "../../../../components";
 
 interface CarouselItemProps {
   item: Manga;
@@ -25,6 +26,7 @@ export const CarouselItem: React.FC<CarouselItemProps> = ({ item }) => {
           uri: item.image,
         }}
       />
+      <Rating style={{ position: "absolute", top: 5, right: 5 }} score={item.score} />
       <View
         style={{
           position: "absolute",
@@ -47,7 +49,7 @@ export const CarouselItem: React.FC<CarouselItemProps> = ({ item }) => {
             {item.title}
           </Text>
           <Text style={{ opacity: 0.8, color: "white" }}>
-            {item.type}, {item.year}
+            {item.type}, {item.year}, {item.genres[0].name}
           </Text>
         </View>
       </View>

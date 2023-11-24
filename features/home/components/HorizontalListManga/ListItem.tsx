@@ -3,6 +3,7 @@ import { memo } from "react";
 import { Image, TouchableHighlight, View } from "react-native";
 import { Manga } from "../../../../common/types";
 import TextTicker from "react-native-text-ticker";
+import { Rating } from "../../../../components";
 
 interface ListItem {
   manga: Manga;
@@ -22,6 +23,7 @@ export const ListItem: React.FC<ListItem> = memo(({ manga }) => {
             uri: manga.poster,
           }}
         />
+        <Rating style={{ position: "absolute", top: 5, right: 5 }} score={manga.score} />
         <Layout
           level="4"
           style={{ borderBottomRightRadius: 10, borderBottomLeftRadius: 10, padding: 10 }}
@@ -29,7 +31,7 @@ export const ListItem: React.FC<ListItem> = memo(({ manga }) => {
           <View>
             <TextTicker style={{ fontSize: 24 }} duration={6000} loop bounce marqueeDelay={1000}>
               <Text category="h6">
-                {manga.title}, {manga.type}
+                {manga.title}, {manga.type}, {manga.genres[0].name}
               </Text>
             </TextTicker>
           </View>
