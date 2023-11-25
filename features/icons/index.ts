@@ -7,4 +7,5 @@ export {
   SettingsIcon,
   AlertIcon,
   RightIcon,
+  FiltersIcon,
 } from "./components";

@@ -1,18 +1,40 @@
-import { PropsWithChildren, forwardRef, useMemo } from "react";
-import { View } from "react-native";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { PropsWithChildren, forwardRef, useCallback, useMemo } from "react";
+import { BottomSheetBackdrop, BottomSheetModal } from "@gorhom/bottom-sheet";
 import { BottomSheetModalMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
+import { Layout } from "@ui-kitten/components";
+import { useAppTheme } from "../../../hooks";
 
 export const BottomSheetComponent = forwardRef<BottomSheetModalMethods, PropsWithChildren>(
   ({ children }, ref) => {
-    const snapPoints = useMemo(() => ["25%", "50%"], []);
+    const snapPoints = useMemo(() => ["75%"], []);
+
+    const { colorScheme } = useAppTheme();
+
+    const renderBackdrop = useCallback(
+      (props: any) => (
+        <BottomSheetBackdrop
+          {...props}
+          disappearsOnIndex={-1}
+          appearsOnIndex={0}
+          pressBehavior="close"
+        />
+      ),
+      []
+    );
 
     return (
-      <View>
-        <BottomSheetModal ref={ref} index={1} snapPoints={snapPoints}>
+      <Layout>
+        <BottomSheetModal
+          ref={ref}
+          snapPoints={snapPoints}
+          index={0}
+          backgroundStyle={{ backgroundColor: colorScheme === "light" ? "#e4e9f2" : "#2a2e3a" }}
+          backdropComponent={renderBackdrop}
+          enableDismissOnClose
+        >
           {children}
         </BottomSheetModal>
-      </View>
+      </Layout>
     );
   }
 );

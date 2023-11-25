@@ -9,7 +9,7 @@ interface RatingProps {
 export const Rating: React.FC<RatingProps> = ({ score, style }) => {
   return (
     <View style={[style, { backgroundColor: "rgba(0, 0, 0, 0.7)", borderRadius: 5, width: 40 }]}>
-      <Text style={{ textAlign: "center", fontWeight: "600" }}>{score}</Text>
+      <Text style={{ textAlign: "center", fontWeight: "600", color: "white" }}>{score}</Text>
     </View>
   );
 };

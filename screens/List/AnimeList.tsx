@@ -4,25 +4,24 @@ import { GridList } from "../../features/anime";
 import { ListLayout } from "../../components/layout";
 import { FiltersSheet } from "../../features/filters";
 import { useCallback, useRef } from "react";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { Button } from "@ui-kitten/components";
+import { useBottomModal } from "../../hooks";
+import { TopActions } from "../../features/navigation";
+import { FiltersIcon } from "../../features/icons";
 
 export const AnimeList: React.FC<StackScreenProps<HomeStackParamsList, "AnimeList">> = ({
   route,
 }) => {
   const { title, ...props } = route.params;
 
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
+  const { bottomFiltersModalRef, openFilters } = useBottomModal();
 
   return (
-    <ListLayout title={title}>
-      <Button onPress={handlePresentModalPress}>Click</Button>
+    <ListLayout
+      title={title}
+      accessoryRight={() => <TopActions icon={FiltersIcon} navigate={openFilters} />}
+    >
       <GridList {...props} />
-      <FiltersSheet ref={bottomSheetModalRef} />
+      <FiltersSheet ref={bottomFiltersModalRef} />
     </ListLayout>
   );
 };
