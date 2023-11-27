@@ -28,7 +28,7 @@ export const BottomSheetComponent = forwardRef<BottomSheetModalMethods, PropsWit
           ref={ref}
           snapPoints={snapPoints}
           index={0}
-          backgroundStyle={{ backgroundColor: colorScheme === "light" ? "#e4e9f2" : "#2a2e3a" }}
+          backgroundStyle={{ backgroundColor: colorScheme === "light" ? "#e4e9f2" : "#343541" }}
           backdropComponent={renderBackdrop}
           enableDismissOnClose
         >

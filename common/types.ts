@@ -82,3 +82,22 @@ export type Meta = {
 export type Response<T> = { data: T; meta?: Meta };
 
 export type Genre = { id: string; name: string };
+
+export interface SelectFilterProps {
+  filterData: Omit<Filter, "component">;
+  query: Query;
+  setQuery: (key: string, value: any) => void;
+}
+
+export type Option = { key: string; value: string | number };
+
+export type Filter = {
+  filterKey: string;
+  component: React.FC<SelectFilterProps>;
+  options: Option[];
+  defaultValue?: string;
+  title?: string;
+  multiple?: boolean;
+};
+
+export type Filters = Filter[];
