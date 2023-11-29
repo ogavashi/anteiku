@@ -1,2 +1,2 @@
-export { FiltersSheet } from "./components";
+export { FiltersSheet, Filters } from "./components";
 export { getSelectValues } from "./lib";

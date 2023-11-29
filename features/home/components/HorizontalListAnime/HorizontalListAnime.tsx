@@ -11,6 +11,7 @@ interface HorizontalListAnimeProps {
   title: string;
   api: () => Promise<Response<Anime[]>>;
   apiKey: string;
+  filterKey?: string;
   defaultQuery?: Query;
 }
 
@@ -18,6 +19,7 @@ export const HorizontalListAnime: React.FC<HorizontalListAnimeProps> = ({
   title,
   api,
   apiKey,
+  filterKey,
   defaultQuery,
 }) => {
   const { query } = useQuery(defaultQuery);
@@ -27,7 +29,7 @@ export const HorizontalListAnime: React.FC<HorizontalListAnimeProps> = ({
   const navigation = useNavigation<NavigationProp<HomeStackParamsList>>();
 
   const handleShowMore = useCallback(() => {
-    navigation.navigate("AnimeList", { title, apiKey });
+    navigation.navigate("AnimeList", { title, apiKey, filterKey });
   }, []);
 
   return (

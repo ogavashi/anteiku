@@ -1,40 +1,41 @@
-import { Filters, HomeStackParamsList } from "../../common/types";
+import { HomeStackParamsList } from "../../common/types";
 import { StackScreenProps } from "@react-navigation/stack";
-import { GridList } from "../../features/anime";
+import { GridList, getFilters } from "../../features/anime";
 import { ListLayout } from "../../components/layout";
 import { FiltersSheet } from "../../features/filters";
-import { useBottomModal } from "../../hooks";
+import { useBottomModal, useQuery } from "../../hooks";
 import { TopActions } from "../../features/navigation";
 import { FiltersIcon } from "../../features/icons";
-import { Filters as Filter } from "../../features/filters/components";
-
-const filters: Filters = [
-  {
-    filterKey: "genre",
-    title: "Genres",
-    component: Filter.SelectFilter,
-    options: [
-      { key: "1", value: "Action" },
-      { key: "2", value: "Romance" },
-    ],
-    multiple: true,
-  },
-];
+import { useMemo } from "react";
 
 export const AnimeList: React.FC<StackScreenProps<HomeStackParamsList, "AnimeList">> = ({
   route,
 }) => {
-  const { title, ...props } = route.params;
+  const { title, filterKey, ...props } = route.params;
 
-  const { bottomFiltersModalRef, openFilters } = useBottomModal();
+  const { bottomModalRef, openModal, closeModal } = useBottomModal();
+
+  const { query, setQuery } = useQuery();
+
+  const filters = useMemo(() => getFilters(filterKey), [filterKey]);
 
   return (
     <ListLayout
       title={title}
-      accessoryRight={() => <TopActions icon={FiltersIcon} navigate={openFilters} />}
+      accessoryRight={
+        filters ? () => <TopActions icon={FiltersIcon} navigate={openModal} /> : undefined
+      }
     >
-      <GridList {...props} />
-      <FiltersSheet filters={filters} ref={bottomFiltersModalRef} />
+      <GridList {...props} query={query} />
+      {filters && (
+        <FiltersSheet
+          query={query}
+          setQuery={setQuery}
+          filters={filters}
+          ref={bottomModalRef}
+          closeModal={closeModal}
+        />
+      )}
     </ListLayout>
   );
 };

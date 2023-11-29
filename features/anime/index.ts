@@ -1,2 +1,2 @@
 export { GridList } from "./components";
-export { getApi } from "./lib";
+export { getApi, getFilters } from "./lib";

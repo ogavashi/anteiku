@@ -52,7 +52,12 @@ export function useInfiniteScroll<T = unknown>(
 
   useEffect(() => {
     fetch();
-  }, [query, paginationData]);
+  }, [paginationData]);
+
+  useEffect(() => {
+    setIsLoading("main");
+    resetPagination();
+  }, [query]);
 
   return { data, isLoading, error, fetchNext, refresh };
 }

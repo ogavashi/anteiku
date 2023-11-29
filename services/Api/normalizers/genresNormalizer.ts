@@ -1,16 +1,10 @@
 import { Genre, Response } from "../../../common/types";
 
-export const genresNormalizer = (rawData: any): Response<Genre[]> => {
+export const genresNormalizer = (rawData: any): Genre[] => {
   const normalized: Genre[] = rawData.data.map((raw: any) => ({
-    id: raw.id,
-    name: raw.attributes.name,
+    value: raw.name,
+    key: raw.mal_id,
   }));
 
-  return {
-    data: normalized,
-    meta: {
-      count: rawData?.meta?.count,
-      hasNext: rawData?.links?.next,
-    },
-  };
+  return normalized;
 };

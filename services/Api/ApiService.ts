@@ -1,6 +1,7 @@
 import axios from "axios";
 import { config } from "../../common/config";
 import { Genres, Ongoing, Trending } from "./entities";
+import * as qs from "qs";
 
 type ApiServiceReturnType = {
   trending: ReturnType<typeof Trending>;
@@ -11,6 +12,9 @@ type ApiServiceReturnType = {
 export const ApiService = (): ApiServiceReturnType => {
   const instance = axios.create({
     baseURL: config.BASE_URL,
+    paramsSerializer: (params) => {
+      return qs.stringify(params, { arrayFormat: "comma" });
+    },
   });
 
   const entities = {

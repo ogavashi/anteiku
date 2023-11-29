@@ -34,6 +34,7 @@ export const Home: React.FC<StackScreenProps<HomeStackParamsList, "Home">> = () 
           title="Ongoing anime"
           api={ongoingApi.ongoingAnime}
           apiKey="ongoingAnime"
+          filterKey="ongoingFilters"
           defaultQuery={queries.ongoing}
         />
         <HorizontalListManga

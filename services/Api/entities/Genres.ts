@@ -1,10 +1,10 @@
 import { AxiosInstance } from "axios";
 import { genresNormalizer } from "../normalizers";
-import { Genre, Response } from "../../../common/types";
+import { Genre } from "../../../common/types";
 
 export const Genres = (instance: AxiosInstance) => ({
-  async getAll(url: string): Promise<Response<Genre[]>> {
-    const { data: rawData } = await instance.get(url);
+  async getAnime(): Promise<Genre[]> {
+    const { data: rawData } = await instance.get("genres/anime");
     const data = genresNormalizer(rawData);
 
     return data;

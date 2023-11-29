@@ -35,7 +35,7 @@ export type AuthStackParamList = {
 
 export type HomeStackParamsList = {
   Home: undefined;
-  AnimeList: { title: string; apiKey: string };
+  AnimeList: { title: string; apiKey: string; filterKey?: string };
   MangaList: { title: string; apiKey: string };
 };
 
@@ -81,7 +81,7 @@ export type Meta = {
 
 export type Response<T> = { data: T; meta?: Meta };
 
-export type Genre = { id: string; name: string };
+export type Genre = { value: string; key: string };
 
 export interface SelectFilterProps {
   filterData: Omit<Filter, "component">;
@@ -94,10 +94,11 @@ export type Option = { key: string; value: string | number };
 export type Filter = {
   filterKey: string;
   component: React.FC<SelectFilterProps>;
-  options: Option[];
+  options?: Option[];
   defaultValue?: string;
   title?: string;
   multiple?: boolean;
+  api?: () => Promise<any>;
 };
 
 export type Filters = Filter[];
