@@ -18,8 +18,8 @@ export const getSelectValues = (query: Query, filterKey: string, options: Option
     return { index: indexes, value };
   }
 
-  const data = rawData as number;
-  const optionIndex = options.findIndex(({ key }) => +key === +data);
+  const data = rawData;
+  const optionIndex = options.findIndex(({ key }) => key === data);
 
   if (optionIndex >= 0) {
     const index = new IndexPath(optionIndex);

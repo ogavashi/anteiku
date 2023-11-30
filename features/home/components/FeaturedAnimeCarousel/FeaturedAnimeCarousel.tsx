@@ -24,7 +24,11 @@ export const FeaturedAnimeCarousel = () => {
   const { data, error } = useFetch(api, "trendingAnime");
 
   const handleShowMore = useCallback(() => {
-    navigation.navigate("AnimeList", { title: "Featured anime", apiKey: "featuredAnime" });
+    navigation.navigate("AnimeList", {
+      title: "Featured anime",
+      apiKey: "featuredAnime",
+      filterKey: "topFilters",
+    });
   }, []);
 
   return (

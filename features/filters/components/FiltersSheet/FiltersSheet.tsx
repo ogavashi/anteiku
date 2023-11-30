@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { BottomSheet } from "../../../../components";
 import { BottomSheetModalMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from "react";
 import { Filters, Query } from "../../../../common/types";
 import { Button } from "@ui-kitten/components";
 
@@ -25,6 +25,12 @@ export const FiltersSheet = forwardRef<BottomSheetModalMethods, FiltersSheetProp
       closeModal();
     }, [filtersQuery]);
 
+    const resetQuery = useCallback(() => {
+      setFiltersQuery({});
+    }, []);
+
+    const isEmpty = useMemo(() => !!!Object.keys(filtersQuery).length, [filtersQuery]);
+
     return (
       <BottomSheet ref={ref}>
         <View
@@ -32,6 +38,7 @@ export const FiltersSheet = forwardRef<BottomSheetModalMethods, FiltersSheetProp
             paddingHorizontal: 10,
             gap: 10,
             height: "100%",
+            width: "100%",
           }}
         >
           {filters.map(({ component: Component, ...filterData }) => (
@@ -42,7 +49,20 @@ export const FiltersSheet = forwardRef<BottomSheetModalMethods, FiltersSheetProp
               key={filterData.filterKey}
             />
           ))}
-          <Button onPress={submitQuery}>Apply</Button>
+          <View
+            style={{
+              gap: 10,
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Button style={{ flex: 1 }} onPress={resetQuery} status="danger" disabled={isEmpty}>
+              Reset
+            </Button>
+            <Button style={{ flex: 1 }} onPress={submitQuery}>
+              Apply
+            </Button>
+          </View>
         </View>
       </BottomSheet>
     );
