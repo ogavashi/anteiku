@@ -31,7 +31,7 @@ export const Item: React.FC<ItemProps> = memo(({ item }) => {
           <View>
             <TextTicker style={{ fontSize: 24 }} duration={6000} loop bounce marqueeDelay={1000}>
               <Text category="h6">
-                {item.title}, {item.type}, {item.genres[0].name}
+                {item.title}, {item.type} {item?.genres[0]?.name ? `, ${item.genres[0].name}` : ""}
               </Text>
             </TextTicker>
           </View>

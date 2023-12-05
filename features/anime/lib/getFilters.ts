@@ -10,6 +10,29 @@ const filters = {
       component: Filters.SelectFilter,
       api: ApiService().genres.getAnime,
     },
+    {
+      filterKey: "order_by",
+      title: "Order By",
+      component: Filters.SelectFilter,
+      options: [
+        { key: "title", value: "Title" },
+        { key: "start_date", value: "Start date" },
+        { key: "end_date", value: "End date" },
+        { key: "episodes", value: "Episodes" },
+        { key: "score", value: "Score" },
+        { key: "popularity", value: "Popularity" },
+      ],
+    },
+    {
+      filterKey: "sort",
+      title: "Sort",
+      component: Filters.ButtonsGroupFilter,
+      options: [
+        { key: "asc", value: "Ascending" },
+        { key: "desc", value: "Descending" },
+      ],
+      watchKey: "order_by",
+    },
   ],
   topFilters: [
     {
