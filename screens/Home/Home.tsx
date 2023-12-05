@@ -3,6 +3,7 @@ import { HomeStackParamsList } from "../../common/types";
 import { ScrollLayout } from "../../components";
 import {
   FeaturedAnimeCarousel,
+  FeaturedMangaCarousel,
   HorizontalListAnime,
   HorizontalListManga,
 } from "../../features/home";
@@ -37,6 +38,7 @@ export const Home: React.FC<StackScreenProps<HomeStackParamsList, "Home">> = () 
           filterKey="ongoingFilters"
           defaultQuery={queries.ongoing}
         />
+        <FeaturedMangaCarousel />
         <HorizontalListManga
           title="Ongoing manga"
           api={ongoingApi.ongoingManga}

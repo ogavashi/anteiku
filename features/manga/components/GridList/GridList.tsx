@@ -1,7 +1,7 @@
 import { FlatList } from "react-native";
 import { Item } from "./Item";
 import { useInfiniteScroll } from "../../../../hooks";
-import { Error, Loader } from "../../../../components";
+import { Error, Loader, NotFound } from "../../../../components";
 import { useMemo } from "react";
 import { getApi } from "../../lib";
 
@@ -30,7 +30,7 @@ export const GridList: React.FC<GridLisProps> = ({ apiKey }) => {
     <FlatList
       data={data}
       numColumns={2}
-      centerContent
+      style={{ flex: 1 }}
       renderItem={({ item }) => <Item item={item} />}
       onEndReached={fetchNext}
       onEndReachedThreshold={0.2}
@@ -38,6 +38,7 @@ export const GridList: React.FC<GridLisProps> = ({ apiKey }) => {
       onRefresh={refresh}
       contentContainerStyle={{ paddingVertical: 10 }}
       ListFooterComponent={<>{isLoading === "next" && <Loader height={100} />}</>}
+      ListEmptyComponent={<NotFound height={500} />}
     />
   );
 };

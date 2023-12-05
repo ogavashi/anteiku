@@ -81,7 +81,7 @@ export type Meta = {
 
 export type Response<T> = { data: T; meta?: Meta };
 
-export type Genre = { value: string; key: string };
+export type Genre = { value: string; key: string; name: string };
 
 export interface SelectFilterProps {
   filterData: Omit<Filter, "component">;
