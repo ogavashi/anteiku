@@ -33,6 +33,8 @@ const filters = {
       ],
       watchKey: "order_by",
     },
+    { filterKey: "start_date", title: "Start date", component: Filters.DatePickerFilter },
+    { filterKey: "end", title: "End date", component: Filters.DatePickerFilter },
   ],
   topFilters: [
     {

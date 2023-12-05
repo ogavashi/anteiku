@@ -95,6 +95,12 @@ export interface ButtonsGroupFilterProps {
   setQuery: (key: string, value: any) => void;
 }
 
+export interface DatePickerFilterProps {
+  filterData: Omit<Filter, "component">;
+  query: Query;
+  setQuery: (key: string, value: any) => void;
+}
+
 export type Option = { key: string; value: string | number };
 
 export type Filter = {

@@ -1,6 +1,6 @@
 import { Button } from "@ui-kitten/components";
 import { ButtonsGroupFilterProps } from "../../../../../common/types";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { View } from "react-native";
 
 export const ButtonsGroupFilter: React.FC<ButtonsGroupFilterProps> = ({
@@ -14,10 +14,9 @@ export const ButtonsGroupFilter: React.FC<ButtonsGroupFilterProps> = ({
     return null;
   }
 
-  const [selected, setSelected] = useState(query[filterKey] || options![0].key);
+  const selected = useMemo(() => query[filterKey] || options![0].key, [query]);
 
   const handleSelect = useCallback((value: string) => {
-    setSelected(value);
     setQuery(filterKey, value);
   }, []);
 
