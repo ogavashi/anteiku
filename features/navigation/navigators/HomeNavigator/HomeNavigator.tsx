@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home, AnimeList, MangaList } from "../../../../screens";
+import { Home, AnimeList, MangaList, Anime } from "../../../../screens";
 import { HomeStackParamsList } from "../../../../common/types";
 
 const Stack = createStackNavigator<HomeStackParamsList>();
@@ -10,6 +10,7 @@ export const HomeNavigator = () => {
       <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
       <Stack.Screen name="AnimeList" component={AnimeList} options={{ headerShown: false }} />
       <Stack.Screen name="MangaList" component={MangaList} options={{ headerShown: false }} />
+      <Stack.Screen name="Anime" component={Anime} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

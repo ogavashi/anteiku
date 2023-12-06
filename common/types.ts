@@ -37,6 +37,7 @@ export type HomeStackParamsList = {
   Home: undefined;
   AnimeList: { title: string; apiKey: string; filterKey?: string };
   MangaList: { title: string; apiKey: string };
+  Anime: undefined;
 };
 
 export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Library">;
