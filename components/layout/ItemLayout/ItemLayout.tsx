@@ -1,5 +1,5 @@
 import { Divider, Layout, Text } from "@ui-kitten/components";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 import { TopActions, TopNavigation } from "../../../features/navigation";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
@@ -26,12 +26,22 @@ export const ItemLayout: React.FC<React.PropsWithChildren<ItemLayoutProps>> = ({
     <Layout style={{ height: "100%" }}>
       <SafeAreaView style={{ marginBottom: 105 }}>
         <TopNavigation
-          title={() => <Text category="h3">{title || "🍙 Anteiku"}</Text>}
+          alignment={title ? "center" : "start"}
+          title={() => (
+            <Text category={title ? "h3" : "h6"} onPress={title ? undefined : navigateBack}>
+              {title || "Back"}
+            </Text>
+          )}
           accessoryLeft={() => <TopActions icon={BackIcon} navigate={navigateBack} />}
           accessoryRight={accessoryRight}
         />
         <Divider />
-        <View style={{ height: "100%" }}>{children}</View>
+        <ScrollView
+          style={{ height: "100%" }}
+          contentContainerStyle={{ marginVertical: 10, paddingBottom: 70 }}
+        >
+          {children}
+        </ScrollView>
       </SafeAreaView>
     </Layout>
   );
