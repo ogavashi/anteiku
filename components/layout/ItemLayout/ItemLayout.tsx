@@ -38,7 +38,7 @@ export const ItemLayout: React.FC<React.PropsWithChildren<ItemLayoutProps>> = ({
         <Divider />
         <ScrollView
           style={{ height: "100%" }}
-          contentContainerStyle={{ marginVertical: 10, paddingBottom: 70 }}
+          contentContainerStyle={{ marginVertical: 10, paddingBottom: 80 }}
         >
           {children}
         </ScrollView>
