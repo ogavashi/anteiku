@@ -8,4 +8,5 @@ export {
   AlertIcon,
   RightIcon,
   FiltersIcon,
+  StarIcon,
 } from "./components";

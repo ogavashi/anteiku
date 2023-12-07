@@ -5,3 +5,4 @@ export { Error } from "./Error";
 export { Rating } from "./Rating";
 export { BottomSheet } from "./BottomSheet";
 export { NotFound } from "./NotFound";
+export { GenreChip } from "./Genre";

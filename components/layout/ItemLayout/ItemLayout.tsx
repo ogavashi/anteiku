@@ -24,11 +24,11 @@ export const ItemLayout: React.FC<React.PropsWithChildren<ItemLayoutProps>> = ({
 
   return (
     <Layout style={{ height: "100%" }}>
-      <SafeAreaView style={{ marginBottom: 105 }}>
+      <SafeAreaView>
         <TopNavigation
           alignment={title ? "center" : "start"}
           title={() => (
-            <Text category={title ? "h3" : "h6"} onPress={title ? undefined : navigateBack}>
+            <Text category="h6" onPress={title ? undefined : navigateBack}>
               {title || "Back"}
             </Text>
           )}

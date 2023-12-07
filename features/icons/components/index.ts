@@ -7,3 +7,4 @@ export { SettingsIcon } from "./SettingsIcon";
 export { AlertIcon } from "./AlertIcon";
 export { RightIcon } from "./RightIcon";
 export { FiltersIcon } from "./FiltersIcon";
+export { StarIcon } from "./StarIcon";

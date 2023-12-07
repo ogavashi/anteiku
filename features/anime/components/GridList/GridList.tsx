@@ -1,6 +1,6 @@
 import { FlatList } from "react-native";
 import { Item } from "./Item";
-import { useInfiniteScroll, usePagination } from "../../../../hooks";
+import { useInfiniteScroll } from "../../../../hooks";
 import { Error, Loader, NotFound } from "../../../../components";
 import { useMemo } from "react";
 import { getApi } from "../../lib";
