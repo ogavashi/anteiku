@@ -3,7 +3,11 @@ import { Loader } from "../../../../components";
 import { useCallback, useState } from "react";
 import YoutubePlayer from "react-native-youtube-iframe";
 
-export const Trailer = () => {
+interface TrailerProps {
+  videoId: string;
+}
+
+export const Trailer: React.FC<TrailerProps> = ({ videoId }) => {
   const [playing, setPlaying] = useState(false);
   const [loading, setIsLoading] = useState(true);
 
@@ -37,7 +41,7 @@ export const Trailer = () => {
       <YoutubePlayer
         height={250}
         play={playing}
-        videoId={"tR8YH0G67Rk"}
+        videoId={videoId}
         onChangeState={onStateChange}
         onReady={handleLoaded}
       />

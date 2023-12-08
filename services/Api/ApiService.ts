@@ -1,13 +1,14 @@
 import axios from "axios";
 import rateLimit from "axios-rate-limit";
 import { config } from "../../common/config";
-import { Genres, Ongoing, Trending } from "./entities";
+import { Genres, Ongoing, Title, Trending } from "./entities";
 import * as qs from "qs";
 
 type ApiServiceReturnType = {
   trending: ReturnType<typeof Trending>;
   ongoing: ReturnType<typeof Ongoing>;
   genres: ReturnType<typeof Genres>;
+  title: ReturnType<typeof Title>;
 };
 
 const instance = rateLimit(
@@ -25,6 +26,7 @@ export const ApiService = (): ApiServiceReturnType => {
     trending: Trending,
     ongoing: Ongoing,
     genres: Genres,
+    title: Title,
   };
 
   const apis = Object.entries(entities).reduce((prev, [key, f]) => {

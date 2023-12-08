@@ -37,7 +37,7 @@ export type HomeStackParamsList = {
   Home: undefined;
   AnimeList: { title: string; apiKey: string; filterKey?: string };
   MangaList: { title: string; apiKey: string };
-  Anime: undefined;
+  Anime: { id: string; title: string };
 };
 
 export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Library">;
@@ -51,6 +51,21 @@ export type Anime = {
   year: string;
   genres: Genre[];
   score: number;
+};
+
+export type FullAnime = Anime & {
+  videoId: string;
+  status: string;
+  rating: string;
+  rank: number;
+  fullYear: number;
+  source: string;
+  season: string;
+  episodes: number;
+  synopsis: string;
+  background: string;
+  studios: Studio[];
+  producers: Producer[];
 };
 
 export type Manga = {
@@ -83,6 +98,8 @@ export type Meta = {
 export type Response<T> = { data: T; meta?: Meta };
 
 export type Genre = { value: string; key: string; name: string };
+export type Studio = { value: string; key: string; name: string };
+export type Producer = { value: string; key: string; name: string };
 
 export interface SelectFilterProps {
   filterData: Omit<Filter, "component">;

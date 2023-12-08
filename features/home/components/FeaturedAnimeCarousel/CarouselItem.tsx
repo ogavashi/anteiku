@@ -14,7 +14,7 @@ export const CarouselItem: React.FC<CarouselItemProps> = ({ item }) => {
   const navigation = useNavigation<NavigationProp<HomeStackParamsList>>();
 
   const handleOpen = useCallback(() => {
-    navigation.navigate("Anime");
+    navigation.navigate("Anime", { id: item.id, title: item.title });
   }, []);
 
   return (

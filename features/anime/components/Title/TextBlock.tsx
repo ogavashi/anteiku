@@ -1,4 +1,4 @@
-import { Text } from "@ui-kitten/components";
+import { Divider, Text } from "@ui-kitten/components";
 import { View } from "react-native";
 
 interface TextBlockProps {
@@ -7,6 +7,10 @@ interface TextBlockProps {
 }
 
 export const TextBlock: React.FC<TextBlockProps> = ({ title, text }) => {
+  if (!text) {
+    return null;
+  }
+
   return (
     <View style={{ gap: 10, marginHorizontal: 10 }}>
       <Text category="h4">{title}</Text>

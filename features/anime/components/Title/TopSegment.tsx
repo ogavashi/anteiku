@@ -1,8 +1,15 @@
 import { Button, Text } from "@ui-kitten/components";
 import { View } from "react-native";
 import { StarIcon } from "../../../icons";
+import TextTicker from "react-native-text-ticker";
 
-export const TopSegment = () => {
+interface TopSegmentProps {
+  title: string;
+  year: number;
+  type: string;
+}
+
+export const TopSegment: React.FC<TopSegmentProps> = ({ title, year, type }) => {
   return (
     <View
       style={{
@@ -14,9 +21,11 @@ export const TopSegment = () => {
       }}
     >
       <View>
-        <Text category="h3">Frieren</Text>
+        <TextTicker style={{ width: 250 }} animationType="scroll" scrollSpeed={50} loop>
+          <Text category="h3">{title}</Text>
+        </TextTicker>
         <Text category="h6" appearance="hint">
-          TV, 2023
+          {type}, {year}
         </Text>
       </View>
       <Button appearance="outline" accessoryRight={StarIcon}>
