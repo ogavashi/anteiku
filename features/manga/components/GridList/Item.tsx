@@ -1,17 +1,24 @@
 import { Layout, Text } from "@ui-kitten/components";
-import React, { memo } from "react";
-import { Image, TouchableHighlight, View } from "react-native";
+import React, { memo, useCallback } from "react";
+import { Image, TouchableOpacity, View } from "react-native";
 import TextTicker from "react-native-text-ticker";
-import { Manga } from "../../../../common/types";
+import { HomeStackParamsList, Manga } from "../../../../common/types";
 import { Rating } from "../../../../components";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 interface ItemProps {
   item: Manga;
 }
 
 export const Item: React.FC<ItemProps> = memo(({ item }) => {
+  const navigation = useNavigation<NavigationProp<HomeStackParamsList>>();
+
+  const handleOpen = useCallback(() => {
+    navigation.navigate("Manga", { id: item.id, title: item.title });
+  }, []);
+
   return (
-    <TouchableHighlight>
+    <TouchableOpacity onPress={handleOpen}>
       <View style={{ marginHorizontal: 10, borderRadius: 1, width: 175, marginBottom: 10 }}>
         <Image
           style={{
@@ -37,6 +44,6 @@ export const Item: React.FC<ItemProps> = memo(({ item }) => {
           </View>
         </Layout>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 });

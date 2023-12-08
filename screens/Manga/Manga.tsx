@@ -1,22 +1,22 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Error as ErrorView, ItemLayout, Loader } from "../../components";
-import { Title } from "../../features/anime";
+import { Title } from "../../features/manga";
 import { ApiService } from "../../services";
 import { StackScreenProps } from "@react-navigation/stack";
-import { FullAnime, HomeStackParamsList } from "../../common/types";
+import { FullManga, HomeStackParamsList } from "../../common/types";
 
-export const Anime: React.FC<StackScreenProps<HomeStackParamsList, "Anime">> = ({ route }) => {
+export const Manga: React.FC<StackScreenProps<HomeStackParamsList, "Manga">> = ({ route }) => {
   const { id, title: animeTitle } = route.params;
 
-  const [title, setTitle] = useState<FullAnime | null>(null);
+  const [title, setTitle] = useState<FullManga | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error>();
 
   const fetchTitle = useCallback(async () => {
     try {
       setIsLoading(true);
-      const anime = await ApiService().title.getAnime(id);
-      setTitle(anime);
+      const manga = await ApiService().title.getManga(id);
+      setTitle(manga);
     } catch (error) {
       console.log(error);
       setError(error as Error);

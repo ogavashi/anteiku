@@ -18,7 +18,7 @@ export const Boarding: React.FC<StackScreenProps<AuthStackParamList, "Boarding">
           }}
         >
           <Text category="h1">Anteiku</Text>
-          <Text appearance="hint">Powered by kitsu</Text>
+          <Text appearance="hint">Powered by Jikan</Text>
         </View>
         <View style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <Text category="h4" status="primary">

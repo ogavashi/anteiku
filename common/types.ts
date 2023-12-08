@@ -38,6 +38,7 @@ export type HomeStackParamsList = {
   AnimeList: { title: string; apiKey: string; filterKey?: string };
   MangaList: { title: string; apiKey: string };
   Anime: { id: string; title: string };
+  Manga: { id: string; title: string };
 };
 
 export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Library">;
@@ -79,6 +80,17 @@ export type Manga = {
   score: number;
 };
 
+export type FullManga = Manga & {
+  status: string;
+  rank: number;
+  chapters: string;
+  volumes: number;
+  synopsis: string;
+  background: string;
+  authors: Author[];
+  serializations: Serialization[];
+};
+
 export type Query = {
   [key in string]: string | number;
 };
@@ -100,6 +112,8 @@ export type Response<T> = { data: T; meta?: Meta };
 export type Genre = { value: string; key: string; name: string };
 export type Studio = { value: string; key: string; name: string };
 export type Producer = { value: string; key: string; name: string };
+export type Author = { value: string; key: string; name: string };
+export type Serialization = { value: string; key: string; name: string };
 
 export interface SelectFilterProps {
   filterData: Omit<Filter, "component">;

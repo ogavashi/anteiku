@@ -10,14 +10,14 @@ import TextTicker from "react-native-text-ticker";
 interface ItemLayoutProps {
   title?: string;
   accessoryRight?: () => React.ReactElement<any, string | React.JSXElementConstructor<any>>;
-  isLoading: boolean;
+  shouldFlex: boolean;
 }
 
 export const ItemLayout: React.FC<React.PropsWithChildren<ItemLayoutProps>> = ({
   children,
   title,
   accessoryRight,
-  isLoading,
+  shouldFlex,
 }) => {
   const navigation = useNavigation<NavigationProp<AppStackParamsList>>();
 
@@ -48,7 +48,7 @@ export const ItemLayout: React.FC<React.PropsWithChildren<ItemLayoutProps>> = ({
           contentContainerStyle={{
             marginVertical: 10,
             paddingBottom: 80,
-            flex: +isLoading,
+            flex: +shouldFlex,
           }}
         >
           {children}
