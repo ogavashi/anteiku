@@ -1,9 +1,9 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import { Button, Layout, Text } from "@ui-kitten/components";
 import { View } from "react-native";
-import { AuthStackParamList } from "../../common/types";
+import { AuthStackParamsList } from "../../common/types";
 
-export const Boarding: React.FC<StackScreenProps<AuthStackParamList, "Boarding">> = ({
+export const Boarding: React.FC<StackScreenProps<AuthStackParamsList, "Boarding">> = ({
   navigation,
 }) => {
   return (

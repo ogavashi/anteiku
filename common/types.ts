@@ -22,9 +22,15 @@ export type AppStackParamsList = {
 export type TabParamList = {
   HomeStack: undefined;
   Library: undefined;
+  Search: undefined;
 };
 
-export type AuthStackParamList = {
+export type SearchStackParamsList = {
+  SearchAnime: { query?: Query };
+  SearchManga: { query?: Query };
+};
+
+export type AuthStackParamsList = {
   Boarding: undefined;
   Login: undefined;
   Register: undefined;

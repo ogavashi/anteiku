@@ -1,0 +1,1 @@
+export { AnimeSearch } from "./AnimeSearch";

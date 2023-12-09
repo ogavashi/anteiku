@@ -14,7 +14,7 @@ export const AnimeList: React.FC<StackScreenProps<HomeStackParamsList, "AnimeLis
   const { title, filterKey, ...props } = route.params;
 
   const { bottomModalRef, openModal, closeModal } = useBottomModal();
-
+  
   const { query, setQuery } = useQuery();
 
   const filters = useMemo(() => getFilters(filterKey), [filterKey]);

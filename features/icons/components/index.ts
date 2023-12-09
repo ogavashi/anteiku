@@ -8,3 +8,4 @@ export { AlertIcon } from "./AlertIcon";
 export { RightIcon } from "./RightIcon";
 export { FiltersIcon } from "./FiltersIcon";
 export { StarIcon } from "./StarIcon";
+export { SearchIcon } from "./SearchIcon";

@@ -1,8 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { Boarding, Login, Register } from "../../../../screens";
-import { AuthStackParamList } from "../../../../common/types";
+import { AuthStackParamsList } from "../../../../common/types";
 
-const Stack = createStackNavigator<AuthStackParamList>();
+const Stack = createStackNavigator<AuthStackParamsList>();
 
 export const AuthNavigator = () => {
   return (

@@ -1,10 +1,10 @@
-import { AuthStackParamList } from "../../common/types";
+import { AuthStackParamsList } from "../../common/types";
 import { useCallback } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import { LoginForm } from "../../features/auth";
 import { AuthLayout } from "../../components";
 
-export const Login: React.FC<StackScreenProps<AuthStackParamList, "Login">> = ({ navigation }) => {
+export const Login: React.FC<StackScreenProps<AuthStackParamsList, "Login">> = ({ navigation }) => {
   const handleLogin = useCallback(() => {
     navigation.navigate("App", { screen: "HomeStack" });
   }, []);

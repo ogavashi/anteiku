@@ -5,3 +5,4 @@ export { Settings } from "./Settings";
 export { AnimeList, MangaList } from "./List";
 export { Boarding, Login, Register } from "./Auth";
 export { Anime } from "./Anime";
+export { AnimeSearch } from "./Search";

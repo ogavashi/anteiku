@@ -9,4 +9,5 @@ export {
   RightIcon,
   FiltersIcon,
   StarIcon,
+  SearchIcon,
 } from "./components";
