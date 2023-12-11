@@ -1,30 +1,29 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import { SearchLayout } from "../../components/layout";
-import { GridList, getFilters } from "../../features/anime";
+import { getFilters } from "../../features/anime";
 import { useBottomModal, useQuery } from "../../hooks";
 import { SearchStackParamsList } from "../../common/types";
 import { useMemo } from "react";
 import { TopActions } from "../../features/navigation";
 import { FiltersIcon } from "../../features/icons";
 import { FiltersSheet } from "../../features/filters";
+import { GridList } from "../../features/manga";
 
-export const AnimeSearch: React.FC<StackScreenProps<SearchStackParamsList, "SearchAnime">> = ({
+export const MangaSearch: React.FC<StackScreenProps<SearchStackParamsList, "SearchManga">> = ({
   route,
 }) => {
-  const { params } = route;
+  const { query: defaultQuery } = route.params;
 
-  const defaultQuery = params?.query;
   const { query, setQuery } = useQuery(defaultQuery);
 
   const { bottomModalRef, openModal, closeModal } = useBottomModal();
 
+  // Change to manga filters
   const filters = useMemo(() => getFilters("ongoingFilters"), []);
-
-  const showBack = useMemo(() => !!defaultQuery, [route]);
 
   return (
     <SearchLayout
-      showBack={showBack}
+      showBack={false}
       query={query}
       setQuery={setQuery}
       accessoryRight={

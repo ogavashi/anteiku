@@ -7,6 +7,8 @@ export const getApi = (apiKey: string): ((query?: Query) => Promise<Response<Man
       return ApiService().trending.getAllManga;
     case "ongoingManga":
       return ApiService().ongoing.getAllManga;
+    case "search":
+      return ApiService().search.getManga;
     default:
       return null;
   }

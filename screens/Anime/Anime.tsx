@@ -3,9 +3,11 @@ import { Error as ErrorView, ItemLayout, Loader } from "../../components";
 import { Title } from "../../features/anime";
 import { ApiService } from "../../services";
 import { StackScreenProps } from "@react-navigation/stack";
-import { FullAnime, HomeStackParamsList } from "../../common/types";
+import { FullAnime, HomeStackParamsList, SearchStackParamsList } from "../../common/types";
 
-export const Anime: React.FC<StackScreenProps<HomeStackParamsList, "Anime">> = ({ route }) => {
+export const Anime: React.FC<
+  StackScreenProps<HomeStackParamsList & SearchStackParamsList, "Anime">
+> = ({ route }) => {
   const { id, title: animeTitle } = route.params;
 
   const [title, setTitle] = useState<FullAnime | null>(null);

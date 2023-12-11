@@ -1,0 +1,1 @@
+export { AnimeIcon } from "./AnimeIcon";

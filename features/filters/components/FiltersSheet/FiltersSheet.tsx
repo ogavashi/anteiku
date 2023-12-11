@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { BottomSheet } from "../../../../components";
 import { BottomSheetModalMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
-import { forwardRef, useCallback, useImperativeHandle, useMemo, useState } from "react";
+import { forwardRef, useCallback, useEffect, useMemo, useState } from "react";
 import { Filters, Query } from "../../../../common/types";
 import { Button } from "@ui-kitten/components";
 
@@ -26,8 +26,15 @@ export const FiltersSheet = forwardRef<BottomSheetModalMethods, FiltersSheetProp
     }, [filtersQuery]);
 
     const resetQuery = useCallback(() => {
-      setFiltersQuery({});
-    }, []);
+      const searchQuery = query?.["q"];
+
+      setFiltersQuery({ q: searchQuery });
+    }, [query]);
+
+    // To watch search input changes
+    useEffect(() => {
+      setFiltersQuery(query);
+    }, [query]);
 
     const isEmpty = useMemo(() => !!!Object.keys(filtersQuery).length, [filtersQuery]);
 

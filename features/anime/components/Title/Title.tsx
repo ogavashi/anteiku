@@ -4,7 +4,7 @@ import { DescTable } from "./DescTable";
 import { Trailer } from "./Trailer";
 import { TopSegment } from "./TopSegment";
 import { Poster } from "./Poster";
-import { SnackList } from "./SnaclList";
+import { SnackList } from "./SnackList";
 import { TextBlock } from "./TextBlock";
 
 interface TitleProps {
@@ -17,7 +17,7 @@ export const Title: React.FC<TitleProps> = ({ item }) => {
       <TopSegment title={item.title} year={+item.year || item.fullYear} type={item.type} />
       <Trailer videoId={item.videoId} />
       <Poster url={item.image} />
-      <SnackList title="Genres" data={item.genres} />
+      <SnackList title="Genres" data={item.genres} queryKey="genres" />
       <TextBlock title="Synopsis" text={item.synopsis} />
       <DescTable item={item} />
       <TextBlock title="Background" text={item.background} />

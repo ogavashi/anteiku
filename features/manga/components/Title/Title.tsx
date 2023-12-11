@@ -3,7 +3,7 @@ import { FullManga } from "../../../../common/types";
 import { DescTable } from "./DescTable";
 import { TopSegment } from "./TopSegment";
 import { Poster } from "./Poster";
-import { SnackList } from "./SnaclList";
+import { SnackList } from "./SnackList";
 import { TextBlock } from "./TextBlock";
 
 interface TitleProps {

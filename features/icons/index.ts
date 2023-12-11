@@ -10,4 +10,6 @@ export {
   FiltersIcon,
   StarIcon,
   SearchIcon,
+  MangaIcon,
+  AnimeIcon,
 } from "./components";

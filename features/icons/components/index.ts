@@ -9,3 +9,5 @@ export { RightIcon } from "./RightIcon";
 export { FiltersIcon } from "./FiltersIcon";
 export { StarIcon } from "./StarIcon";
 export { SearchIcon } from "./SearchIcon";
+export { MangaIcon } from "./MangaIcon";
+export { AnimeIcon } from "./AnimeIcon";

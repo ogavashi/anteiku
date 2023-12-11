@@ -1,0 +1,1 @@
+export { MangaIcon } from "./MangaIcon";

@@ -2,7 +2,7 @@ import { Layout, Text } from "@ui-kitten/components";
 import React, { memo, useCallback } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import TextTicker from "react-native-text-ticker";
-import { Anime, HomeStackParamsList } from "../../../../common/types";
+import { Anime, HomeStackParamsList, SearchStackParamsList } from "../../../../common/types";
 import { Rating } from "../../../../components";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
@@ -11,7 +11,7 @@ interface ItemProps {
 }
 
 export const Item: React.FC<ItemProps> = memo(({ item }) => {
-  const navigation = useNavigation<NavigationProp<HomeStackParamsList>>();
+  const navigation = useNavigation<NavigationProp<SearchStackParamsList & HomeStackParamsList>>();
 
   const handleOpen = useCallback(() => {
     navigation.navigate("Anime", { id: item.id, title: item.title });
