@@ -27,10 +27,11 @@ export const SearchLayout: React.FC<React.PropsWithChildren<SearchLayoutProps>> 
   const navigateCategory = useCallback(() => {
     const path = route.name === "SearchManga" ? "SearchAnime" : "SearchManga";
 
-    navigation.navigate(path, { query: {} });
+    navigation.navigate(path, { query: undefined });
   }, [navigation, route]);
 
   const navigateBack = useCallback(() => {
+    navigation.setParams({ query: undefined });
     navigation.goBack();
     setQuery({});
   }, []);

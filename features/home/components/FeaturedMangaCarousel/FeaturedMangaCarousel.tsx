@@ -24,7 +24,11 @@ export const FeaturedMangaCarousel = () => {
   const { data, error } = useFetch(api, "trendingManga");
 
   const handleShowMore = useCallback(() => {
-    navigation.navigate("MangaList", { title: "Featured manga", apiKey: "trendingManga" });
+    navigation.navigate("MangaList", {
+      title: "Featured manga",
+      apiKey: "trendingManga",
+      filterKey: "topFilters",
+    });
   }, []);
 
   return (

@@ -9,4 +9,11 @@ export const Genres = (instance: AxiosInstance) => ({
 
     return data;
   },
+
+  async getManga(): Promise<Genre[]> {
+    const { data: rawData } = await instance.get("genres/manga");
+    const data = genresNormalizer(rawData);
+
+    return data;
+  },
 });

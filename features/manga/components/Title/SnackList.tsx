@@ -5,9 +5,10 @@ import { Chip } from "../../../../components";
 interface SnackListProps {
   title: string;
   data: { [key in string]: string }[];
+  queryKey?: string;
 }
 
-export const SnackList: React.FC<SnackListProps> = ({ title, data }) => {
+export const SnackList: React.FC<SnackListProps> = ({ title, data, queryKey }) => {
   if (!data.length) {
     return null;
   }
@@ -20,7 +21,9 @@ export const SnackList: React.FC<SnackListProps> = ({ title, data }) => {
       <FlatList
         horizontal
         data={data}
-        renderItem={({ item }) => <Chip value={item.name} itemKey={item.key} key={item.key} />}
+        renderItem={({ item }) => (
+          <Chip value={item.name} itemKey={item.id} key={item.id} queryKey={queryKey} />
+        )}
         contentContainerStyle={{ paddingHorizontal: 5 }}
       />
     </View>

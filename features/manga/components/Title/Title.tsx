@@ -15,7 +15,7 @@ export const Title: React.FC<TitleProps> = ({ item }) => {
     <View style={{ display: "flex", justifyContent: "center", gap: 20 }}>
       <TopSegment title={item.title} year={item.year} type={item.type} />
       <Poster url={item.image} />
-      <SnackList title="Genres" data={item.genres} />
+      <SnackList title="Genres" data={item.genres} queryKey="genres" />
       <TextBlock title="Synopsis" text={item.synopsis} />
       <DescTable item={item} />
       <TextBlock title="Background" text={item.background} />

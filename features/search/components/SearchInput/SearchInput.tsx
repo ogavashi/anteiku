@@ -10,7 +10,7 @@ interface SearchInputProps {
   setQuery: React.Dispatch<React.SetStateAction<Query>>;
 }
 
-export const SearchInput: React.FC<SearchInputProps> = ({ setQuery, queryKey }) => {
+export const SearchInput: React.FC<SearchInputProps> = ({ setQuery, query, queryKey }) => {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce<string>(value, 500);
 
@@ -25,6 +25,14 @@ export const SearchInput: React.FC<SearchInputProps> = ({ setQuery, queryKey }) 
   useEffect(() => {
     handleSearch();
   }, [debouncedValue]);
+
+  useEffect(() => {
+    const value = query?.[queryKey];
+
+    if (!value) {
+      setValue("");
+    }
+  }, [query]);
 
   return (
     <View style={{ width: "75%" }}>

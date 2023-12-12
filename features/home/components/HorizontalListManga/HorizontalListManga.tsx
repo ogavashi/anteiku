@@ -11,6 +11,7 @@ interface HorizontalListMangaProps {
   title: string;
   api: () => Promise<Response<Manga[]>>;
   apiKey: string;
+  filterKey?: string;
   defaultQuery?: Query;
 }
 
@@ -18,6 +19,7 @@ export const HorizontalListManga: React.FC<HorizontalListMangaProps> = ({
   title,
   api,
   apiKey,
+  filterKey,
   defaultQuery,
 }) => {
   const { query } = useQuery(defaultQuery);
@@ -27,7 +29,7 @@ export const HorizontalListManga: React.FC<HorizontalListMangaProps> = ({
   const navigation = useNavigation<NavigationProp<HomeStackParamsList>>();
 
   const handleShowMore = useCallback(() => {
-    navigation.navigate("MangaList", { title, apiKey: apiKey });
+    navigation.navigate("MangaList", { title, apiKey, filterKey });
   }, []);
 
   return (

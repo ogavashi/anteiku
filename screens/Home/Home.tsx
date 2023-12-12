@@ -43,6 +43,7 @@ export const Home: React.FC<StackScreenProps<HomeStackParamsList, "Home">> = () 
           title="Ongoing manga"
           api={ongoingApi.ongoingManga}
           apiKey="ongoingManga"
+          filterKey="ongoingFilters"
           defaultQuery={queries.ongoing}
         />
       </View>

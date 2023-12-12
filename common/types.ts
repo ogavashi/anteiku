@@ -47,7 +47,7 @@ export type AuthStackParamsList = {
 export type HomeStackParamsList = {
   Home: undefined;
   AnimeList: { title: string; apiKey: string; filterKey?: string };
-  MangaList: { title: string; apiKey: string };
+  MangaList: { title: string; apiKey: string; filterKey?: string };
   Anime: { id: string; title: string };
   Manga: { id: string; title: string };
 };

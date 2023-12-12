@@ -18,7 +18,7 @@ export const AnimeSearch: React.FC<StackScreenProps<SearchStackParamsList, "Sear
 
   const { bottomModalRef, openModal, closeModal } = useBottomModal();
 
-  const filters = useMemo(() => getFilters("ongoingFilters"), []);
+  const filters = useMemo(() => getFilters("searchFilters"), []);
 
   const showBack = useMemo(() => !!defaultQuery, [route]);
 
