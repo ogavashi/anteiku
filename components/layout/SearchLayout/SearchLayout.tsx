@@ -3,7 +3,7 @@ import { SafeAreaView, View } from "react-native";
 import { TopActions, TopNavigation } from "../../../features/navigation";
 import { NavigationProp, useNavigation, useRoute } from "@react-navigation/native";
 import { useCallback, useMemo } from "react";
-import { AppStackParamsList, Query, SearchStackParamsList } from "../../../common/types";
+import { Query, SearchStackParamsList } from "../../../common/types";
 import { AnimeIcon, BackIcon, MangaIcon } from "../../../features/icons";
 import { SearchInput } from "../../../features/search";
 
