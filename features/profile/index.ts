@@ -1,1 +1,1 @@
-export { ProfileMenu } from "./components";
+export { ProfileMenu, AccountForm } from "./components";

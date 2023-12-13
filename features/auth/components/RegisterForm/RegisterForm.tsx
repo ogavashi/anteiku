@@ -17,7 +17,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister }) =>
     formState: { errors },
     watch,
   } = useForm({
-    defaultValues: { email: "", username: "", password: "", confirmPassword: "" },
+    defaultValues: { email: "", username: "", fullName: "", password: "", confirmPassword: "" },
     reValidateMode: "onSubmit",
   });
 
@@ -111,6 +111,39 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister }) =>
         {errors?.username && (
           <Text category="h6" status="danger">
             {errors.username.message}
+          </Text>
+        )}
+      </View>
+      <View style={{ display: "flex", gap: 10, minHeight: 120 }}>
+        <Controller
+          name="fullName"
+          control={control}
+          rules={{
+            required: "Can't be empty",
+            minLength: { value: 2, message: "Can't be shorter than 2 characters" },
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              label={() => (
+                <Text
+                  category="h4"
+                  status={errors?.fullName ? "danger" : "basic"}
+                  style={{ marginBottom: 5 }}
+                >
+                  Full name
+                </Text>
+              )}
+              size="large"
+              status={errors?.fullName ? "danger" : "basic"}
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+            />
+          )}
+        />
+        {errors?.fullName && (
+          <Text category="h6" status="danger">
+            {errors.fullName.message}
           </Text>
         )}
       </View>
