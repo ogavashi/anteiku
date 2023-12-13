@@ -2,13 +2,13 @@ import { PersonalAccountParamsList } from "../../common/types";
 import { View } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ProfileLayout } from "../../components";
-import { SettingsList } from "../../features/settings";
+import { Text } from "@ui-kitten/components";
 
-export const Settings: React.FC<StackScreenProps<PersonalAccountParamsList, "Settings">> = () => {
+export const Account: React.FC<StackScreenProps<PersonalAccountParamsList, "Account">> = () => {
   return (
-    <ProfileLayout title="Settings" backMode>
+    <ProfileLayout title="Account" backMode>
       <View style={{ marginVertical: 10, marginHorizontal: 20 }}>
-        <SettingsList />
+        <Text>Account</Text>
       </View>
     </ProfileLayout>
   );

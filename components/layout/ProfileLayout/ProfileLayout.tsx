@@ -32,7 +32,6 @@ export const ProfileLayout: React.FC<React.PropsWithChildren<ProfileLayoutProps>
             <TopActions icon={backMode ? BackIcon : CloseIcon} navigate={navigateBack} />
           )}
         />
-        <Divider />
         {children}
       </SafeAreaView>
     </Layout>

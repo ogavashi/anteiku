@@ -15,8 +15,13 @@ export interface GenresSlice {
 export type AppStackParamsList = {
   App: undefined;
   Auth: undefined;
+  PersonalAccount: undefined;
+};
+
+export type PersonalAccountParamsList = {
   Profile: undefined;
   Settings: undefined;
+  Account: undefined;
 };
 
 export type TabParamList = {

@@ -17,7 +17,7 @@ export const ScrollLayout: React.FC<React.PropsWithChildren<ScrollLayoutProps>> 
   const navigation = useNavigation<NavigationProp<AppStackParamsList>>();
 
   const openProfile = useCallback(() => {
-    navigation.navigate("Profile");
+    navigation.navigate("PersonalAccount");
   }, [navigation]);
 
   return (
