@@ -118,6 +118,11 @@ export type PageInfo = {
 
 export type Loading = "main" | "next" | "refresh" | false;
 
+export type ModalData = {
+  key: string;
+  label: string;
+};
+
 export type Meta = {
   hasNext: boolean | string;
   count: number;

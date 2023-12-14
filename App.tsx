@@ -6,6 +6,7 @@ import { StatusBar, StatusBarStyle } from "expo-status-bar";
 import { useAppTheme } from "./hooks";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import Toast from "react-native-toast-message";
 
 export default function App() {
   const { theme, style } = useAppTheme();
@@ -17,6 +18,7 @@ export default function App() {
           <IconRegistry icons={EvaIconsPack} />
           <StatusBar style={style as StatusBarStyle} />
           <RootNavigator />
+          <Toast />
         </BottomSheetModalProvider>
       </GestureHandlerRootView>
     </ApplicationProvider>

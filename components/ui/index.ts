@@ -6,3 +6,4 @@ export { Rating } from "./Rating";
 export { BottomSheet } from "./BottomSheet";
 export { NotFound } from "./NotFound";
 export { Chip } from "./Chip";
+export { Modal } from "./Modal";
