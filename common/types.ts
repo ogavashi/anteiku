@@ -26,11 +26,16 @@ export type PersonalAccountParamsList = {
 
 export type TabParamList = {
   HomeStack: undefined;
-  Library: undefined;
+  LibraryStack: undefined;
   Search: {
     screen: keyof SearchStackParamsList;
     params: { query?: Query };
   };
+};
+
+export type LibraryStackParamsList = {
+  Library: undefined;
+  List: undefined;
 };
 
 export type SearchStackParamsList = {
@@ -56,8 +61,6 @@ export type HomeStackParamsList = {
   Anime: { id: string; title: string };
   Manga: { id: string; title: string };
 };
-
-export type ProfileScreenProps = BottomTabScreenProps<TabParamList, "Library">;
 
 export type Anime = {
   id: string;
