@@ -171,3 +171,9 @@ export type Filter = {
 };
 
 export type Filters = Filter[];
+
+export type CollectionShort = {
+  title: string;
+  icon: string;
+  key: string;
+};
