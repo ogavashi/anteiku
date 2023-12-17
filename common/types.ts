@@ -177,3 +177,9 @@ export type CollectionShort = {
   icon: string;
   key: string;
 };
+
+export type LibraryModalData = {
+  mode: "create" | "update" | "delete";
+  id?: string;
+  data?: string;
+};

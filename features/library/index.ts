@@ -1,1 +1,1 @@
-export { Collections } from "./components";
+export { Collections, EditModal } from "./components";

@@ -12,4 +12,5 @@ export {
   SearchIcon,
   MangaIcon,
   AnimeIcon,
+  AddIcon,
 } from "./components";
