@@ -2,9 +2,10 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Menu, MenuItem, Divider, Text } from "@ui-kitten/components";
 import { useCallback } from "react";
 import { PersonalAccountParamsList } from "../../../../common/types";
-import { SettingsIcon } from "../../../icons";
+import { ExitIcon, SettingsIcon } from "../../../icons";
 import { View } from "react-native";
 import { AccountShort } from "../AccountShort";
+import { supabase } from "../../../../common/supabase";
 
 export const ProfileMenu = () => {
   const navigation = useNavigation<NavigationProp<PersonalAccountParamsList>>();
@@ -12,6 +13,11 @@ export const ProfileMenu = () => {
   const openSetting = useCallback(() => {
     navigation.navigate("Settings");
   }, [navigation]);
+
+  const logout = useCallback(async () => {
+    navigation.goBack();
+    await supabase.auth.signOut();
+  }, []);
 
   return (
     <View style={{ gap: 10 }}>
@@ -22,6 +28,7 @@ export const ProfileMenu = () => {
         </Text>
         <Menu scrollEnabled={false}>
           <MenuItem title="Settings" onPress={openSetting} accessoryLeft={SettingsIcon} />
+          <MenuItem title="Sign out" onPress={logout} accessoryLeft={ExitIcon} />
         </Menu>
       </View>
     </View>

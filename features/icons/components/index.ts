@@ -12,3 +12,4 @@ export { SearchIcon } from "./SearchIcon";
 export { MangaIcon } from "./MangaIcon";
 export { AnimeIcon } from "./AnimeIcon";
 export { AddIcon } from "./AddIcon";
+export { ExitIcon } from "./ExitIcon";

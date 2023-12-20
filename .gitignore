@@ -9,6 +9,9 @@ ios
 #android
 android
 
+#envoirment
+.env
+
 # Expo
 .expo/
 dist/

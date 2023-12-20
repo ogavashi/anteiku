@@ -1,10 +1,18 @@
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { Session } from "@supabase/supabase-js";
 
 export type Theme = "light" | "dark" | "automatic";
 
 export interface AppSlice {
   theme: Theme;
   setTheme: (theme: Theme) => void;
+}
+
+export interface AuthSlice {
+  session: Session | null;
+  initialized: boolean;
+  setSession: (session: Session | null) => void;
+  setInitialized: (isFetching: boolean) => void;
 }
 
 export interface GenresSlice {

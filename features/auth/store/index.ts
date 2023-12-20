@@ -1,0 +1,1 @@
+export { useAuthSlice } from "./authSlice";

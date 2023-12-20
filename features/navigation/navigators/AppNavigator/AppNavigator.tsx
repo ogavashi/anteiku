@@ -1,18 +1,27 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { TabNavigator } from "../TabNavigator";
 import { AuthNavigator } from "../AuthNavigator";
-import { CardStyleInterpolators } from "@react-navigation/stack";
 import { AppStackParamsList } from "../../../../common/types";
-import { Profile, Settings } from "../../../../screens";
 import { PersonalAccountNavigator } from "../PersonalAccountNavigator";
+import { useStore } from "../../../../store";
+import { Loader } from "../../../../components";
 
 const Stack = createStackNavigator<AppStackParamsList>();
 
 export const AppNavigator = () => {
+  const { session, initialized } = useStore();
+
+  if (!initialized) {
+    return <Loader />;
+  }
+
   return (
     <Stack.Navigator>
-      <Stack.Screen name="App" component={TabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="Auth" component={AuthNavigator} options={{ headerShown: false }} />
+      {session ? (
+        <Stack.Screen name="App" component={TabNavigator} options={{ headerShown: false }} />
+      ) : (
+        <Stack.Screen name="Auth" component={AuthNavigator} options={{ headerShown: false }} />
+      )}
       <Stack.Screen
         name="PersonalAccount"
         component={PersonalAccountNavigator}

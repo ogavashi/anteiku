@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
 import { GestureResponderEvent, ImageProps, TouchableWithoutFeedback, View } from "react-native";
 import { Button, Icon, Input, Text } from "@ui-kitten/components";
-import { RenderProp } from "@ui-kitten/components/devsupport";
 import { Controller, useForm } from "react-hook-form";
+import { supabase } from "../../../../common/supabase";
 
 interface RegisterFormProps {
   handleRegister: (event: GestureResponderEvent) => void;
@@ -25,8 +25,10 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister }) =>
     setSecureTextEntry((prev) => !prev);
   }, []);
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    const { data: res, error } = await supabase.auth.signUp(data);
+
+    console.log(res);
   });
 
   const renderIcon = (props: any) => (

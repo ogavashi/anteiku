@@ -13,4 +13,5 @@ export {
   MangaIcon,
   AnimeIcon,
   AddIcon,
+  ExitIcon,
 } from "./components";

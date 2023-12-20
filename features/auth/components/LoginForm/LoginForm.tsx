@@ -1,7 +1,14 @@
 import { useCallback, useState } from "react";
-import { GestureResponderEvent, ImageProps, TouchableWithoutFeedback, View } from "react-native";
+import {
+  Alert,
+  GestureResponderEvent,
+  ImageProps,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { Button, Icon, Input, Text } from "@ui-kitten/components";
 import { Controller, useForm } from "react-hook-form";
+import { supabase } from "../../../../common/supabase";
 
 interface LoginFormProps {
   handleLogin: (event: GestureResponderEvent) => void;
@@ -20,8 +27,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
     setSecureTextEntry((prev) => !prev);
   }, []);
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    const { error, data: res } = await supabase.auth.signInWithPassword(data);
+
+    console.log(res);
+
+    if (error) Alert.alert(error.message);
   });
 
   const renderIcon = (props: any) => (

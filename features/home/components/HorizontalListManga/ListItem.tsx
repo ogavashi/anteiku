@@ -38,7 +38,8 @@ export const ListItem: React.FC<ListItem> = memo(({ manga }) => {
           <View>
             <TextTicker style={{ fontSize: 24 }} duration={6000} loop bounce marqueeDelay={1000}>
               <Text category="h6">
-                {manga.title}, {manga.type}, {manga.genres[0].name}
+                {manga.title}, {manga.type}
+                {manga.genres[0]?.name ? `, ${manga.genres[0].name}` : ""}
               </Text>
             </TextTicker>
           </View>

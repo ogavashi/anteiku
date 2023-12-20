@@ -7,3 +7,4 @@ export { useIsFirstRender } from "./useIsFirstRender";
 export { useBottomModal } from "./useBottomModal";
 export { useDebounce } from "./useDebounce";
 export { useImagePicker } from "./useImagePicker";
+export { useAuth } from "./useAuth";
