@@ -15,7 +15,6 @@ export const ProfileMenu = () => {
   }, [navigation]);
 
   const logout = useCallback(async () => {
-    navigation.goBack();
     await supabase.auth.signOut();
   }, []);
 

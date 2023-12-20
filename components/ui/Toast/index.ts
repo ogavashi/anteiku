@@ -1,0 +1,1 @@
+export { toastConfig } from "./toastConfig";

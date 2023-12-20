@@ -20,10 +20,14 @@ export interface GenresSlice {
   setGenres: (genres: Genre[]) => void;
 }
 
-export type AppStackParamsList = {
+export type AuthenticatedStackParamsList = {
   App: undefined;
-  Auth: undefined;
   PersonalAccount: undefined;
+};
+
+export type AppStackParamsList = {
+  Authenticated: undefined;
+  Auth: undefined;
 };
 
 export type PersonalAccountParamsList = {

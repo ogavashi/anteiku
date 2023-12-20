@@ -9,13 +9,17 @@ import {
 import { Button, Icon, Input, Text } from "@ui-kitten/components";
 import { Controller, useForm } from "react-hook-form";
 import { supabase } from "../../../../common/supabase";
+import { AuthError } from "@supabase/supabase-js";
+import Toast from "react-native-toast-message";
 
 interface LoginFormProps {
-  handleLogin: (event: GestureResponderEvent) => void;
+  handleLogin?: (event: GestureResponderEvent) => void;
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [error, setError] = useState<AuthError | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     control,
@@ -28,11 +32,22 @@ export const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
   }, []);
 
   const onSubmit = handleSubmit(async (data) => {
-    const { error, data: res } = await supabase.auth.signInWithPassword(data);
+    setIsLoading(true);
+    setError(null);
+    try {
+      const { error } = await supabase.auth.signInWithPassword(data);
 
-    console.log(res);
-
-    if (error) Alert.alert(error.message);
+      if (error) {
+        setError(error);
+        Toast.show({ type: "error", text1: "Ops", text2: error.message });
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        Toast.show({ type: "error", text1: "Error", text2: error.message });
+      }
+    } finally {
+      setIsLoading(false);
+    }
   });
 
   const renderIcon = (props: any) => (
@@ -67,11 +82,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
                 </Text>
               )}
               size="large"
-              status={errors?.email ? "danger" : "basic"}
+              status={errors?.email || error ? "danger" : "basic"}
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
               keyboardType="email-address"
+              disabled={isLoading}
             />
           )}
         />
@@ -98,23 +114,26 @@ export const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
                 </Text>
               )}
               size="large"
-              status={errors?.password ? "danger" : "basic"}
+              status={errors?.password || error ? "danger" : "basic"}
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
               accessoryRight={renderIcon}
               secureTextEntry={secureTextEntry}
+              disabled={isLoading}
             />
           )}
         />
         {errors?.password && (
           <Text category="h6" status="danger">
-            {errors.password.message}
+            {errors?.password?.message}
           </Text>
         )}
       </View>
       <View>
-        <Button onPress={onSubmit}>Login</Button>
+        <Button onPress={onSubmit} disabled={isLoading}>
+          Login
+        </Button>
       </View>
     </View>
   );

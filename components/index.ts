@@ -6,4 +6,15 @@ export {
   SearchLayout,
   LibraryLayout,
 } from "./layout";
-export { DotsCarousel, Loader, Error, Rating, BottomSheet, NotFound, Chip, Modal, FAB } from "./ui";
+export {
+  DotsCarousel,
+  Loader,
+  Error,
+  Rating,
+  BottomSheet,
+  NotFound,
+  Chip,
+  Modal,
+  FAB,
+  toastConfig,
+} from "./ui";

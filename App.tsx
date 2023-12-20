@@ -7,6 +7,7 @@ import { useAppTheme, useAuth } from "./hooks";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import Toast from "react-native-toast-message";
+import { toastConfig } from "./components";
 
 export default function App() {
   useAuth();
@@ -20,7 +21,7 @@ export default function App() {
           <IconRegistry icons={EvaIconsPack} />
           <StatusBar style={style as StatusBarStyle} />
           <RootNavigator />
-          <Toast />
+          <Toast config={toastConfig} position="bottom" />
         </BottomSheetModalProvider>
       </GestureHandlerRootView>
     </ApplicationProvider>
