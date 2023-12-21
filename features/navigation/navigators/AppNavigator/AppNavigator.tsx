@@ -1,5 +1,4 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { TabNavigator } from "../TabNavigator";
 import { AuthNavigator } from "../AuthNavigator";
 import { AppStackParamsList } from "../../../../common/types";
 import { useStore } from "../../../../store";

@@ -7,8 +7,6 @@ export const useAuth = () => {
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log(session);
-      console.log("USER>>>>", session?.user);
       setSession(session);
       setInitialized(true);
     });
