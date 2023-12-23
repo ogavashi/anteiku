@@ -40,7 +40,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister }) =>
         password: data.password,
         options: {
           data: {
-            full_name: data.fullName,
+            fullName: data.fullName,
             username: data.username,
           },
         },

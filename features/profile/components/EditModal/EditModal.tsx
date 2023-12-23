@@ -1,20 +1,15 @@
 import { Modal } from "../../../../components";
 import { Button, Card, Input, Text } from "@ui-kitten/components";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
-import { ModalData } from "../../../../common/types";
+import { FormUser, ModalData } from "../../../../common/types";
 import { View } from "react-native";
 import { useAppTheme } from "../../../../hooks";
-
-const mockUser = {
-  fullName: "Test User",
-  username: "testUser",
-};
 
 interface EditModalProps {
   modalData: ModalData;
   setModalData: Dispatch<SetStateAction<ModalData | null>>;
-  onChange: (key: keyof typeof mockUser, value: string) => void;
-  user: typeof mockUser;
+  onChange: (key: keyof FormUser, value: string) => void;
+  user: FormUser;
 }
 
 export const EditModal: React.FC<EditModalProps> = ({
@@ -23,7 +18,7 @@ export const EditModal: React.FC<EditModalProps> = ({
   onChange,
   user,
 }) => {
-  const [value, setValue] = useState(user[modalData.key as keyof typeof mockUser]);
+  const [value, setValue] = useState(user[modalData.key as keyof FormUser]);
 
   const { colorScheme } = useAppTheme();
 
@@ -36,7 +31,7 @@ export const EditModal: React.FC<EditModalProps> = ({
   }, []);
 
   const handleSubmit = useCallback(() => {
-    onChange(modalData.key as keyof typeof mockUser, value);
+    onChange(modalData.key as keyof FormUser, value!);
     handleClose();
   }, [value]);
 

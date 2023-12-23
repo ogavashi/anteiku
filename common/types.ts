@@ -1,5 +1,4 @@
-import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { Session } from "@supabase/supabase-js";
+import { Session, User } from "@supabase/supabase-js";
 
 export type Theme = "light" | "dark" | "automatic";
 
@@ -11,8 +10,10 @@ export interface AppSlice {
 export interface AuthSlice {
   session: Session | null;
   initialized: boolean;
+  user: User | null;
   setSession: (session: Session | null) => void;
   setInitialized: (isFetching: boolean) => void;
+  setUser: (user: User | null) => void;
 }
 
 export interface GenresSlice {
@@ -194,4 +195,10 @@ export type LibraryModalData = {
   mode: "create" | "update" | "delete";
   id?: string;
   data?: string;
+};
+
+export type FormUser = {
+  username: string;
+  fullName: string;
+  avatarUrl?: string;
 };

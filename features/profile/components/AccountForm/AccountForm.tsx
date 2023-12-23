@@ -2,28 +2,43 @@ import { Divider, Layout, Text } from "@ui-kitten/components";
 import { useCallback, useState } from "react";
 import { View } from "react-native";
 import { EditModal } from "../EditModal";
-import { ModalData } from "../../../../common/types";
+import { FormUser, ModalData } from "../../../../common/types";
 import { useAppTheme } from "../../../../hooks";
 import { DataRow } from "./DataRow";
 import { Avatar } from "./Avatar";
+import { useStore } from "../../../../store";
+import { supabase } from "../../../../common/supabase";
 
 export const AccountForm = () => {
-  const mockUser = {
-    fullName: "Test User",
-    username: "testUser",
-  };
+  const { user } = useStore();
+
+  if (!user) {
+    return null;
+  }
 
   const { colorScheme } = useAppTheme();
 
-  const [user, setUser] = useState<typeof mockUser>(mockUser);
+  const [formUser, setFormUser] = useState<FormUser>({
+    username: user.user_metadata.username,
+    fullName: user.user_metadata.full_name,
+    avatarUrl: user?.user_metadata.avatar_url,
+  });
 
   const [modalData, setModalData] = useState<ModalData | null>(null);
 
-  const handleChangeData = useCallback((key: keyof typeof mockUser, value: string) => {
-    setUser((prev) => ({ ...prev, [key]: value }));
+  const handleChangeData = useCallback(async (key: keyof FormUser, value?: string) => {
+    const update = { id: user.id, [key]: value };
+
+    const { error, data } = await supabase.auth.updateUser({ data: update });
+
+    if (!error) {
+      setFormUser((prev) => ({ ...prev, [key]: value || "" }));
+    }
+
+    console.log(data);
   }, []);
 
-  const addModalData = useCallback((key: keyof typeof mockUser, label: string) => {
+  const addModalData = useCallback((key: keyof FormUser, label: string) => {
     setModalData({ key, label });
   }, []);
 
@@ -41,13 +56,13 @@ export const AccountForm = () => {
           <View style={{ padding: 10, gap: 10 }}>
             <DataRow
               label="Full name"
-              value={user.fullName}
+              value={formUser.fullName}
               addModalData={() => addModalData("fullName", "Full name")}
             />
             <Divider />
             <DataRow
               label="Username"
-              value={"@" + user.username}
+              value={"@" + formUser.username}
               addModalData={() => addModalData("username", "Username")}
             />
           </View>
@@ -58,7 +73,7 @@ export const AccountForm = () => {
           modalData={modalData}
           setModalData={setModalData}
           onChange={handleChangeData}
-          user={user}
+          user={formUser}
         />
       )}
     </View>

@@ -14,7 +14,7 @@ export const useStore = create<AppSlice & AuthSlice>()(
     {
       name: "anteiku-store",
       storage: createJSONStorage(() => zustandStorage),
-      partialize: (state) => ({ theme: state.theme }),
+      partialize: (state) => ({ theme: state.theme, session: state.session }),
     }
   )
 );
