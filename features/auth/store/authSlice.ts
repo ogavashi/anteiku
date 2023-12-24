@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand";
-import { AuthSlice } from "../../../common/types";
-import { Session, User } from "@supabase/supabase-js";
+import { AuthSlice, User } from "../../../common/types";
+import { Session } from "@supabase/supabase-js";
 
 export const useAuthSlice: StateCreator<AuthSlice> = (set) => ({
   session: null,

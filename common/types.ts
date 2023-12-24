@@ -1,4 +1,4 @@
-import { Session, User } from "@supabase/supabase-js";
+import { Session } from "@supabase/supabase-js";
 
 export type Theme = "light" | "dark" | "automatic";
 
@@ -6,6 +6,14 @@ export interface AppSlice {
   theme: Theme;
   setTheme: (theme: Theme) => void;
 }
+
+export type User = {
+  id: string;
+  fullName: string;
+  username: string;
+  email: string;
+  avatarUrl?: string;
+};
 
 export interface AuthSlice {
   session: Session | null;
@@ -195,10 +203,4 @@ export type LibraryModalData = {
   mode: "create" | "update" | "delete";
   id?: string;
   data?: string;
-};
-
-export type FormUser = {
-  username: string;
-  fullName: string;
-  avatarUrl?: string;
 };

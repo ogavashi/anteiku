@@ -1,2 +1,2 @@
 export { Error } from "./components";
-export { authErrorFormatter } from "./lib";
+export { authErrorFormatter, updateErrorFormatter } from "./lib";

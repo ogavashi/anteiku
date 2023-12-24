@@ -29,7 +29,7 @@ export const AccountShort = () => {
       >
         <Avatar onPress={handleNavigateAccount} />
         <View style={{ display: "flex", justifyContent: "flex-start" }}>
-          <Text category="h6">{user?.user_metadata.username}</Text>
+          <Text category="h6">{user?.username}</Text>
           <Text appearance="hint">{user?.email}</Text>
         </View>
       </View>
