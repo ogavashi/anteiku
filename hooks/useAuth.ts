@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { supabase } from "../common/supabase";
 import { useStore } from "../store";
 import { getUserProfile } from "../lib";
+import { generalErrorFormatter } from "../features/error";
+import Toast from "react-native-toast-message";
 
 export const useAuth = () => {
   const { setSession, setInitialized, setUser } = useStore();
@@ -13,9 +15,9 @@ export const useAuth = () => {
       if (authUser) {
         const { user, error } = await getUserProfile(authUser.id);
 
-        // Temporary
         if (error) {
-          console.log("error", error);
+          const formatted = generalErrorFormatter(error);
+          Toast.show({ type: "error", text1: "Ops", text2: formatted });
         }
 
         setUser(user);

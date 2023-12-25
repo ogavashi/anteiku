@@ -4,6 +4,7 @@ import { AppStackParamsList } from "../../../../common/types";
 import { useStore } from "../../../../store";
 import { Loader } from "../../../../components";
 import { AuthenticatedNavigator } from "../AuthenticatedNavigator";
+import { Layout } from "@ui-kitten/components";
 
 const Stack = createStackNavigator<AppStackParamsList>();
 
@@ -11,7 +12,11 @@ export const AppNavigator = () => {
   const { session, initialized } = useStore();
 
   if (!initialized) {
-    return <Loader />;
+    return (
+      <Layout>
+        <Loader />
+      </Layout>
+    );
   }
 
   return (
