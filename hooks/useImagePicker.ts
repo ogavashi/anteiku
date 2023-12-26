@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 
 export const useImagePicker = () => {
@@ -22,5 +22,9 @@ export const useImagePicker = () => {
 
   const imageUri = useMemo(() => image?.assets?.[0].uri, [image]);
 
-  return { image, imageUri, pickImage };
+  const clearImage = useCallback(() => {
+    setImage(null);
+  }, []);
+
+  return { image, imageUri, pickImage, clearImage };
 };

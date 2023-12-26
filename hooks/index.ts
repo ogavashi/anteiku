@@ -8,3 +8,4 @@ export { useBottomModal } from "./useBottomModal";
 export { useDebounce } from "./useDebounce";
 export { useImagePicker } from "./useImagePicker";
 export { useAuth } from "./useAuth";
+export { useAvatar } from "./useAvatar";

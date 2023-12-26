@@ -27,10 +27,12 @@ export const AccountShort = () => {
           alignItems: "center",
         }}
       >
-        <Avatar onPress={handleNavigateAccount} />
+        <Avatar onPress={handleNavigateAccount} url={user?.avatarUrl} />
         <View style={{ display: "flex", justifyContent: "flex-start" }}>
           <Text category="h6">{user?.username}</Text>
-          <Text appearance="hint">{user?.email}</Text>
+          <Text appearance="hint" style={{ height: 20 }}>
+            {user?.email}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

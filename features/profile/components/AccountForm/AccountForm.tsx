@@ -25,7 +25,7 @@ export const AccountForm = () => {
 
   return (
     <View style={{ paddingVertical: 10 }}>
-      <Avatar userUri="https://i0.wp.com/omnigeekempire.com/wp-content/uploads/2023/02/the-eminence-in-shadow-cid-visual-1.webp?fit=800%2C450&ssl=1" />
+      <Avatar />
       <View style={{ margin: 10, gap: 10 }}>
         <Text category="h5">Personal information</Text>
         <Layout
