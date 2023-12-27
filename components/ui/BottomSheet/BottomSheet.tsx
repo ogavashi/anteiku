@@ -4,37 +4,44 @@ import { BottomSheetModalMethods } from "@gorhom/bottom-sheet/lib/typescript/typ
 import { Layout } from "@ui-kitten/components";
 import { useAppTheme } from "../../../hooks";
 
-export const BottomSheetComponent = forwardRef<BottomSheetModalMethods, PropsWithChildren>(
-  ({ children }, ref) => {
-    const snapPoints = useMemo(() => ["75%"], []);
+interface BottomSheetComponentProps {
+  height?: string;
+  onDismiss?: () => void;
+}
 
-    const { colorScheme } = useAppTheme();
+export const BottomSheetComponent = forwardRef<
+  BottomSheetModalMethods,
+  PropsWithChildren<BottomSheetComponentProps>
+>(({ children, height = "75%", onDismiss }, ref) => {
+  const snapPoints = useMemo(() => [height], []);
 
-    const renderBackdrop = useCallback(
-      (props: any) => (
-        <BottomSheetBackdrop
-          {...props}
-          disappearsOnIndex={-1}
-          appearsOnIndex={0}
-          pressBehavior="close"
-        />
-      ),
-      []
-    );
+  const { colorScheme } = useAppTheme();
 
-    return (
-      <Layout>
-        <BottomSheetModal
-          ref={ref}
-          snapPoints={snapPoints}
-          index={0}
-          backgroundStyle={{ backgroundColor: colorScheme === "light" ? "#e4e9f2" : "#343541" }}
-          backdropComponent={renderBackdrop}
-          enableDismissOnClose
-        >
-          {children}
-        </BottomSheetModal>
-      </Layout>
-    );
-  }
-);
+  const renderBackdrop = useCallback(
+    (props: any) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+        pressBehavior="close"
+      />
+    ),
+    []
+  );
+
+  return (
+    <Layout>
+      <BottomSheetModal
+        ref={ref}
+        snapPoints={snapPoints}
+        index={0}
+        backgroundStyle={{ backgroundColor: colorScheme === "light" ? "#e4e9f2" : "#343541" }}
+        backdropComponent={renderBackdrop}
+        enableDismissOnClose
+        onDismiss={onDismiss}
+      >
+        {children}
+      </BottomSheetModal>
+    </Layout>
+  );
+});

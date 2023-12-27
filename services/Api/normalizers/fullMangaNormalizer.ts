@@ -29,6 +29,7 @@ export const fullMangaNormalizer = (rawData: any): FullManga => {
     chapters: raw.chapters || "?",
     rank: raw.rank,
     status: raw.status === "Finished" ? "Finished" : "Ongoing",
+    isAnime: false,
   };
 
   return normalized;

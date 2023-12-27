@@ -25,6 +25,7 @@ export const fullAnimeNormalizer = (rawData: any): FullAnime => {
     episodes: raw.episodes || "?",
     fullYear: raw.year,
     synopsis: raw.synopsis,
+    isAnime: true,
     studios: raw?.studios.map((studio: { [key in string]: string }) => ({
       id: studio.mal_id,
       name: studio.name,

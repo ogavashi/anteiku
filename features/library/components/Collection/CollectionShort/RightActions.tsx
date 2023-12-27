@@ -17,7 +17,7 @@ export const RightActions: React.FC<RightActionsProps> = ({ progress, dragValue 
       }}
     >
       <Button status="danger" size="giant">
-        Delete
+        Erase
       </Button>
     </View>
   );

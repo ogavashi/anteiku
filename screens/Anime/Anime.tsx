@@ -4,6 +4,10 @@ import { Title } from "../../features/anime";
 import { ApiService } from "../../services";
 import { StackScreenProps } from "@react-navigation/stack";
 import { FullAnime, HomeStackParamsList, SearchStackParamsList } from "../../common/types";
+import { TopActions } from "../../features/navigation";
+import { AddIcon } from "../../features/icons";
+import { AddToLibrarySheet } from "../../features/library";
+import { useBottomModal } from "../../hooks";
 
 export const Anime: React.FC<
   StackScreenProps<HomeStackParamsList & SearchStackParamsList, "Anime">
@@ -13,6 +17,8 @@ export const Anime: React.FC<
   const [title, setTitle] = useState<FullAnime | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error>();
+
+  const { bottomModalRef, openModal, closeModal } = useBottomModal();
 
   const fetchTitle = useCallback(async () => {
     try {
@@ -45,8 +51,15 @@ export const Anime: React.FC<
   const shouldFlex = useMemo(() => !!(isLoading || error), [isLoading, error]);
 
   return (
-    <ItemLayout title={animeTitle} shouldFlex={shouldFlex}>
+    <ItemLayout
+      title={animeTitle}
+      shouldFlex={shouldFlex}
+      accessoryRight={
+        !isLoading ? () => <TopActions icon={AddIcon} navigate={openModal} /> : undefined
+      }
+    >
       {renderContent()}
+      {title && <AddToLibrarySheet ref={bottomModalRef} closeModal={closeModal} title={title} />}
     </ItemLayout>
   );
 };

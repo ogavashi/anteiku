@@ -92,6 +92,7 @@ export type Anime = {
   year: string;
   genres: Genre[];
   score: number;
+  isAnime: boolean;
 };
 
 export type FullAnime = Anime & {
@@ -118,6 +119,7 @@ export type Manga = {
   year: string;
   genres: Genre[];
   score: number;
+  isAnime: boolean;
 };
 
 export type FullManga = Manga & {
@@ -199,6 +201,10 @@ export type CollectionShort = {
   key: string;
 };
 
+export type Collection = CollectionShort & {
+  count: number;
+  added: boolean;
+};
 export type LibraryModalData = {
   mode: "create" | "update" | "delete";
   id?: string;

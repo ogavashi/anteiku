@@ -5,6 +5,7 @@ export const animeNormalizer = (rawData: any): Anime[] => {
     const title = {
       id: raw.mal_id,
       type: raw.type,
+      isAnime: true,
       title: raw?.title || raw?.title_english || raw?.title_japanese || "No title",
       image: raw?.images?.jpg?.large_image_url || raw?.images?.webp?.large_image_ur,
       score: raw.score,

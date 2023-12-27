@@ -11,15 +11,15 @@ export const Icon: React.FC<IconProps> = ({ icon }) => {
       level="4"
       style={{
         borderRadius: 10,
-        width: 100,
-        height: 100,
+        width: 85,
+        height: 85,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
       <View>
-        <Text style={{ fontSize: 64 }}>{icon}</Text>
+        <Text style={{ fontSize: 54 }}>{icon}</Text>
       </View>
     </Layout>
   );
