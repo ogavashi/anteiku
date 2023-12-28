@@ -1,15 +1,14 @@
-import { Button, Text } from "@ui-kitten/components";
+import { Text } from "@ui-kitten/components";
 import { View } from "react-native";
-import { StarIcon } from "../../../icons";
 import TextTicker from "react-native-text-ticker";
+import { Rating } from "./Rating";
+import { FullAnime } from "../../../../common/types";
 
 interface TopSegmentProps {
-  title: string;
-  year: number;
-  type: string;
+  title: FullAnime;
 }
 
-export const TopSegment: React.FC<TopSegmentProps> = ({ title, year, type }) => {
+export const TopSegment: React.FC<TopSegmentProps> = ({ title }) => {
   return (
     <View
       style={{
@@ -22,15 +21,13 @@ export const TopSegment: React.FC<TopSegmentProps> = ({ title, year, type }) => 
     >
       <View>
         <TextTicker style={{ width: 250 }} animationType="scroll" scrollSpeed={50} loop>
-          <Text category="h3">{title}</Text>
+          <Text category="h3">{title.title}</Text>
         </TextTicker>
         <Text category="h6" appearance="hint">
-          {type}, {year}
+          {title.type}, {+title.year || title.fullYear}
         </Text>
       </View>
-      <Button appearance="outline" accessoryRight={StarIcon}>
-        Rate
-      </Button>
+      <Rating title={title} />
     </View>
   );
 };

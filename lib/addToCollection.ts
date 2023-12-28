@@ -14,8 +14,6 @@ export const addToCollection = async (userId: string, title: Anime | Manga, coll
   }
 
   if (data?.length === 0) {
-    console.log("1");
-
     const targetCollection = collection === "watching" ? "dropped" : "watching";
 
     if (collection === "watching" || collection === "dropped") {
@@ -27,13 +25,10 @@ export const addToCollection = async (userId: string, title: Anime | Manga, coll
         .eq("isAnime", title.isAnime);
 
       if (error) {
-        console.log(error);
         return error;
       }
 
-      console.log("1.5");
       if (data.length) {
-        console.log("delete");
         const { error: deleteError } = await supabase
           .from(targetCollection)
           .delete()
@@ -44,7 +39,7 @@ export const addToCollection = async (userId: string, title: Anime | Manga, coll
         }
       }
     }
-    console.log("Add");
+
     const { error } = await supabase
       .from(collection)
       .insert({ user_id: userId, title_id: title.id, isAnime: title.isAnime });
@@ -52,7 +47,6 @@ export const addToCollection = async (userId: string, title: Anime | Manga, coll
     return error;
   }
 
-  console.log("2");
   const { error: deleteError } = await supabase.from(collection).delete().eq("id", data[0].id);
 
   return deleteError;

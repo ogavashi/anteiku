@@ -1,4 +1,4 @@
-import { Divider, Text } from "@ui-kitten/components";
+import { Text } from "@ui-kitten/components";
 import { View } from "react-native";
 
 interface TextBlockProps {
