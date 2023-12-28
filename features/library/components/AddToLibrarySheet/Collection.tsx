@@ -8,36 +8,11 @@ import Toast from "react-native-toast-message";
 
 interface CollectionProps {
   collection: TCollection;
-  handleAdd: (collection: string) => Promise<PostgrestError | null>;
+  handleAdd: (collection: string) => void;
+  isLoading: boolean;
 }
 
-export const Collection: React.FC<CollectionProps> = ({ collection, handleAdd }) => {
-  const [isAdded, setIsAdded] = useState(collection.added);
-  const [count, setCount] = useState(collection.count);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handlePress = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const error = await handleAdd(collection.key);
-
-      if (error) {
-        Toast.show({ type: "error", text1: "Error", text2: error.message });
-
-        return;
-      }
-
-      setIsAdded((prev) => !prev);
-      setCount((prev) => (isAdded ? prev - 1 : prev + 1));
-    } catch (error) {
-      if (error instanceof Error) {
-        Toast.show({ type: "error", text1: "Error", text2: error.message });
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }, [handleAdd, collection, isAdded]);
-
+export const Collection: React.FC<CollectionProps> = ({ collection, handleAdd, isLoading }) => {
   return (
     <View
       style={{
@@ -52,15 +27,15 @@ export const Collection: React.FC<CollectionProps> = ({ collection, handleAdd })
       <Icon icon={collection.icon} />
       <View style={{ gap: 5 }}>
         <Text category="h5">{collection.title}</Text>
-        <Text appearance="hint">Number of titles: {count}</Text>
+        <Text appearance="hint">Number of titles: {collection.count}</Text>
       </View>
       <Button
         style={{ flex: 1 }}
-        onPress={handlePress}
-        status={isAdded ? "danger" : "primary"}
+        onPress={() => handleAdd(collection.key)}
+        status={collection.added ? "danger" : "primary"}
         disabled={isLoading}
       >
-        {isAdded ? "Remove" : "Add"}
+        {collection.added ? "Remove" : "Add"}
       </Button>
     </View>
   );

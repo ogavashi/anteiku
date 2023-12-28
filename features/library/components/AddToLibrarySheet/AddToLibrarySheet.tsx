@@ -1,5 +1,5 @@
 import { BottomSheetModalMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
-import { forwardRef, useCallback, useEffect, useMemo, useState } from "react";
+import { forwardRef, useCallback, useEffect, useState } from "react";
 import { BottomSheet, Loader } from "../../../../components";
 import { View } from "react-native";
 import { BASE_COLLECTIONS } from "../../../../common/baseCollections";
@@ -7,7 +7,8 @@ import { Collection } from "./Collection";
 import { addToCollection, getCollections } from "../../../../lib";
 import { useStore } from "../../../../store";
 import { Anime, Collection as TCollection, Manga } from "../../../../common/types";
-import { Error } from "../../../error";
+import { Error as ErrorComponent } from "../../../error";
+import Toast from "react-native-toast-message";
 
 interface AddToLibrarySheetProps {
   closeModal: () => void;
@@ -17,66 +18,75 @@ interface AddToLibrarySheetProps {
 export const AddToLibrarySheet = forwardRef<BottomSheetModalMethods, AddToLibrarySheetProps>(
   ({ closeModal, title }, ref) => {
     const { user } = useStore();
-
     const [isLoading, setIsLoading] = useState(false);
+    const [isRefetching, setIsRefetching] = useState(false);
     const [collections, setCollections] = useState<TCollection[] | null>(null);
-    const [refetch, setRefetch] = useState(false);
 
     if (!user) {
       return null;
     }
 
     useEffect(() => {
-      fetchCollections();
-    }, []);
+      const initialFetch = async () => {
+        setIsLoading(true);
+        await fetchCollections();
+        setIsLoading(false);
+      };
 
-    useEffect(() => {
-      if (refetch) {
-        fetchCollections();
-        setRefetch(false);
-      }
-    }, [refetch]);
+      initialFetch();
+    }, []);
 
     const fetchCollections = useCallback(async () => {
       try {
-        setIsLoading(true);
         const fetched = await getCollections(BASE_COLLECTIONS, user.id, title);
-        setCollections(fetched);
+        setCollections(fetched || []);
       } catch (error) {
+        if (error instanceof Error) {
+          Toast.show({ type: "error", text1: "Error", text2: error.message });
+        }
         setCollections([]);
-      } finally {
-        setIsLoading(false);
       }
-    }, []);
+    }, [user, title]);
 
     const handleAdd = useCallback(
       async (collection: string) => {
+        setIsRefetching(true);
+
         const error = await addToCollection(user.id, title, collection);
 
-        return error;
-      },
-      [user, title]
-    );
+        if (error) {
+          Toast.show({ type: "error", text1: "Error", text2: error.message });
+          return;
+        }
 
-    const handleRefresh = useCallback(() => {
-      setRefetch(true);
-    }, []);
+        await fetchCollections();
+
+        setIsRefetching(false);
+      },
+      [user, title, fetchCollections]
+    );
 
     const renderContent = useCallback(() => {
       if (isLoading) {
         return <Loader />;
       }
+
       if (!collections) {
-        return <Error message="Error" />;
+        return <ErrorComponent message="Error" />;
       }
 
       return collections.map((collection) => (
-        <Collection key={collection.key} collection={collection} handleAdd={handleAdd} />
+        <Collection
+          key={collection.key}
+          collection={collection}
+          handleAdd={handleAdd}
+          isLoading={isRefetching}
+        />
       ));
-    }, [isLoading, collections, handleAdd]);
+    }, [isLoading, collections, handleAdd, isRefetching]);
 
     return (
-      <BottomSheet ref={ref} height="40%" onDismiss={handleRefresh}>
+      <BottomSheet ref={ref} height="40%">
         <View
           style={{
             gap: 10,
