@@ -2,9 +2,6 @@ import { Button, Text } from "@ui-kitten/components";
 import { View } from "react-native";
 import { Collection as TCollection } from "../../../../common/types";
 import { Icon } from "./Icon";
-import { useCallback, useState } from "react";
-import { PostgrestError } from "@supabase/supabase-js";
-import Toast from "react-native-toast-message";
 
 interface CollectionProps {
   collection: TCollection;
