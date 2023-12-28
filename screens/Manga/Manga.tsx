@@ -4,13 +4,19 @@ import { Title } from "../../features/manga";
 import { ApiService } from "../../services";
 import { StackScreenProps } from "@react-navigation/stack";
 import { FullManga, HomeStackParamsList } from "../../common/types";
+import { TopActions } from "../../features/navigation";
+import { AddIcon } from "../../features/icons";
+import { AddToLibrarySheet } from "../../features/library";
+import { useBottomModal } from "../../hooks";
 
 export const Manga: React.FC<StackScreenProps<HomeStackParamsList, "Manga">> = ({ route }) => {
-  const { id, title: animeTitle } = route.params;
+  const { id, title: mangaTitle } = route.params;
 
   const [title, setTitle] = useState<FullManga | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error>();
+
+  const { bottomModalRef, openModal, closeModal } = useBottomModal();
 
   const fetchTitle = useCallback(async () => {
     try {
@@ -43,8 +49,15 @@ export const Manga: React.FC<StackScreenProps<HomeStackParamsList, "Manga">> = (
   const shouldFlex = useMemo(() => !!(isLoading || error), [isLoading, error]);
 
   return (
-    <ItemLayout title={animeTitle} shouldFlex={shouldFlex}>
+    <ItemLayout
+      title={mangaTitle}
+      shouldFlex={shouldFlex}
+      accessoryRight={
+        !isLoading ? () => <TopActions icon={AddIcon} navigate={openModal} /> : undefined
+      }
+    >
       {renderContent()}
+      {title && <AddToLibrarySheet ref={bottomModalRef} closeModal={closeModal} title={title} />}
     </ItemLayout>
   );
 };

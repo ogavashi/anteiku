@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { Anime, AnimeSearch, MangaSearch } from "../../../../screens";
 import { SearchStackParamsList } from "../../../../common/types";
+import { Manga } from "../../../../screens/Manga";
 
 const Stack = createStackNavigator<SearchStackParamsList>();
 
@@ -14,6 +15,7 @@ export const SearchNavigator = () => {
         options={{ headerShown: false, presentation: "transparentModal" }}
       />
       <Stack.Screen name="Anime" component={Anime} options={{ headerShown: false }} />
+      <Stack.Screen name="Manga" component={Manga} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
