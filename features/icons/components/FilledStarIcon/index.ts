@@ -1,0 +1,1 @@
+export { FilledStarIcon } from "./FilledStar";

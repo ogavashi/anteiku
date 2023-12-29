@@ -14,4 +14,5 @@ export {
   AnimeIcon,
   AddIcon,
   ExitIcon,
+  FilledStarIcon,
 } from "./components";

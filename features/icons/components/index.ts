@@ -13,3 +13,4 @@ export { MangaIcon } from "./MangaIcon";
 export { AnimeIcon } from "./AnimeIcon";
 export { AddIcon } from "./AddIcon";
 export { ExitIcon } from "./ExitIcon";
+export { FilledStarIcon } from "./FilledStarIcon";

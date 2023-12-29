@@ -1,5 +1,5 @@
 import { Button } from "@ui-kitten/components";
-import { StarIcon } from "../../../icons";
+import { FilledStarIcon, StarIcon } from "../../../icons";
 import { FullAnime } from "../../../../common/types";
 import { useCallback, useEffect, useState } from "react";
 import { getUserRating } from "../../../../lib";
@@ -7,6 +7,7 @@ import { useStore } from "../../../../store";
 import Toast from "react-native-toast-message";
 import { Loader } from "../../../../components";
 import { View } from "react-native";
+import { RateModal } from "./RateModal";
 
 interface RatingProps {
   title: FullAnime;
@@ -21,6 +22,16 @@ export const Rating: React.FC<RatingProps> = ({ title }) => {
 
   const [rating, setRating] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleClose = useCallback(() => {
+    setIsVisible(false);
+  }, []);
+
+  const handleOpen = useCallback(() => {
+    setIsVisible(true);
+  }, []);
 
   useEffect(() => {
     fetchRating();
@@ -56,20 +67,36 @@ export const Rating: React.FC<RatingProps> = ({ title }) => {
       );
     }
 
+    const commonProps = {
+      onPress: handleOpen,
+    };
+
     if (!rating) {
       return (
-        <Button appearance="outline" accessoryRight={StarIcon}>
+        <Button {...commonProps} appearance="outline" accessoryRight={StarIcon}>
           Rate
         </Button>
       );
     }
 
     return (
-      <Button appearance="outline" accessoryRight={StarIcon}>
+      <Button {...commonProps} appearance="filled" accessoryRight={FilledStarIcon}>
         {rating}
       </Button>
     );
   }, [isLoading, rating]);
 
-  return renderContent();
+  return (
+    <>
+      {renderContent()}
+      <RateModal
+        isVisible={isVisible}
+        handleClose={handleClose}
+        rating={rating}
+        setRating={setRating}
+        userId={user.id}
+        title={title}
+      />
+    </>
+  );
 };
