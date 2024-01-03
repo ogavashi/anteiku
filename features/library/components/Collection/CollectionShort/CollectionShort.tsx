@@ -4,19 +4,28 @@ import { Icon } from "./Icon";
 import { Collection } from "../../../../../common/types";
 import { Swipeable } from "react-native-gesture-handler";
 import { RightActions } from "./RightActions";
+import { getCollection } from "../../../../../lib";
+import { useStore } from "../../../../../store";
 
 interface CollectionShortProps {
   collection: Collection;
 }
 
 export const CollectionShort: React.FC<CollectionShortProps> = ({ collection }) => {
+  const { user } = useStore();
+
+  const test = async () => {
+    const { data, error } = await getCollection(collection.key, user!.id);
+    console.log(data, error);
+  };
+
   return (
     <Swipeable
       renderRightActions={(progress, dragValue) => (
         <RightActions progress={progress} dragValue={dragValue} />
       )}
     >
-      <TouchableOpacity>
+      <TouchableOpacity onPress={test}>
         <View
           style={{
             display: "flex",
