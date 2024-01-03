@@ -52,6 +52,9 @@ export type TabParamList = {
     screen: keyof SearchStackParamsList;
     params: { query?: Query };
   };
+  PersonalAccount: {
+    screen: keyof PersonalAccountParamsList;
+  };
 };
 
 export type LibraryStackParamsList = {

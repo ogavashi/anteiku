@@ -4,7 +4,7 @@ import { TopNavigation } from "../../../features/navigation";
 import { Avatar } from "../../ui";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
-import { AppStackParamsList } from "../../../common/types";
+import { TabParamList } from "../../../common/types";
 
 interface ScrollLayoutProps {
   title?: string;
@@ -14,10 +14,10 @@ export const ScrollLayout: React.FC<React.PropsWithChildren<ScrollLayoutProps>> 
   children,
   title,
 }) => {
-  const navigation = useNavigation<NavigationProp<AppStackParamsList>>();
+  const navigation = useNavigation<NavigationProp<TabParamList>>();
 
   const openProfile = useCallback(() => {
-    navigation.navigate("PersonalAccount");
+    navigation.navigate("PersonalAccount", { screen: "Profile" });
   }, [navigation]);
 
   return (

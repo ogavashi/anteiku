@@ -4,7 +4,7 @@ import { Anime, CollectionShort, Manga } from "../common/types";
 export const getCollections = async (
   collections: CollectionShort[],
   userId: string,
-  title: Anime | Manga
+  title?: Anime | Manga
 ) => {
   const fetchedCollections = await Promise.all(
     collections.map(async (collection) => {
@@ -17,8 +17,8 @@ export const getCollections = async (
         .from(collection.key)
         .select()
         .eq("user_id", userId)
-        .eq("title_id", title.id)
-        .eq("isAnime", title.isAnime)
+        .eq("title_id", title?.id)
+        .eq("isAnime", title?.isAnime)
         .single();
 
       return { ...collection, count: count || 0, added: !!existing };
