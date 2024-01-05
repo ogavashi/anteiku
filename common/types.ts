@@ -9,7 +9,7 @@ export interface AppSlice {
 
 export type User = {
   id: string;
-  fullName: string;
+  fullname: string;
   username: string;
   email: string;
   avatarUrl?: string;

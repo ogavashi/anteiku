@@ -18,4 +18,5 @@ export {
   Modal,
   FAB,
   toastConfig,
+  OverlayLoader,
 } from "./ui";

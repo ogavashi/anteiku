@@ -37,8 +37,8 @@ export const AccountForm = () => {
           <View style={{ padding: 10, gap: 10 }}>
             <DataRow
               label="Full name"
-              value={user.fullName}
-              addModalData={() => addModalData("fullName", "Full name")}
+              value={user.fullname}
+              addModalData={() => addModalData("fullname", "Full name")}
             />
             <Divider />
             <DataRow

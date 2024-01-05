@@ -23,7 +23,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister }) =>
     formState: { errors },
     watch,
   } = useForm({
-    defaultValues: { email: "", username: "", fullName: "", password: "", confirmPassword: "" },
+    defaultValues: { email: "", username: "", fullname: "", password: "", confirmPassword: "" },
     reValidateMode: "onSubmit",
   });
 
@@ -40,8 +40,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister }) =>
         password: data.password,
         options: {
           data: {
-            fullName: data.fullName,
+            fullname: data.fullname,
             username: data.username,
+            email: data.email,
           },
         },
       });
@@ -155,7 +156,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister }) =>
         </View>
         <View style={{ display: "flex", gap: 10, minHeight: 120 }}>
           <Controller
-            name="fullName"
+            name="fullname"
             control={control}
             rules={{
               required: "Can't be empty",
@@ -166,14 +167,14 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister }) =>
                 label={() => (
                   <Text
                     category="h4"
-                    status={errors?.fullName || error?.fullame ? "danger" : "basic"}
+                    status={errors?.fullname || error?.fullame ? "danger" : "basic"}
                     style={{ marginBottom: 5 }}
                   >
                     Full name
                   </Text>
                 )}
                 size="large"
-                status={errors?.fullName || error?.fullName ? "danger" : "basic"}
+                status={errors?.fullname || error?.fullname ? "danger" : "basic"}
                 value={value}
                 onChangeText={onChange}
                 onBlur={onBlur}
@@ -181,9 +182,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister }) =>
               />
             )}
           />
-          {(errors?.fullName || error?.fullName) && (
+          {(errors?.fullname || error?.fullname) && (
             <Text category="h6" status="danger">
-              {errors?.fullName?.message || error?.fullName}
+              {errors?.fullname?.message || error?.fullname}
             </Text>
           )}
         </View>

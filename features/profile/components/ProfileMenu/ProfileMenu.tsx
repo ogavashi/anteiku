@@ -1,13 +1,16 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Menu, MenuItem, Divider, Text } from "@ui-kitten/components";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { PersonalAccountParamsList } from "../../../../common/types";
 import { ExitIcon, SettingsIcon } from "../../../icons";
 import { View } from "react-native";
 import { AccountShort } from "../AccountShort";
 import { supabase } from "../../../../common/supabase";
+import { OverlayLoader } from "../../../../components";
 
 export const ProfileMenu = () => {
+  const [showLoader, setShowLoader] = useState(false);
+
   const navigation = useNavigation<NavigationProp<PersonalAccountParamsList>>();
 
   const openSetting = useCallback(() => {
@@ -15,6 +18,7 @@ export const ProfileMenu = () => {
   }, [navigation]);
 
   const logout = useCallback(async () => {
+    setShowLoader(true);
     await supabase.auth.signOut();
   }, []);
 
@@ -30,6 +34,7 @@ export const ProfileMenu = () => {
           <MenuItem title="Sign out" onPress={logout} accessoryLeft={ExitIcon} />
         </Menu>
       </View>
+      <OverlayLoader showLoader={showLoader} />
     </View>
   );
 };
