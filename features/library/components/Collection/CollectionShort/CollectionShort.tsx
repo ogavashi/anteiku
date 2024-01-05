@@ -1,22 +1,20 @@
 import { Text } from "@ui-kitten/components";
 import { TouchableOpacity, View } from "react-native";
 import { Icon } from "./Icon";
-import { Collection } from "../../../../../common/types";
+import { Collection, LibraryStackParamsList } from "../../../../../common/types";
 import { Swipeable } from "react-native-gesture-handler";
 import { RightActions } from "./RightActions";
-import { getCollection } from "../../../../../lib";
-import { useStore } from "../../../../../store";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 interface CollectionShortProps {
   collection: Collection;
 }
 
 export const CollectionShort: React.FC<CollectionShortProps> = ({ collection }) => {
-  const { user } = useStore();
+  const navigation = useNavigation<NavigationProp<LibraryStackParamsList>>();
 
-  const test = async () => {
-    const { data, error } = await getCollection(collection.key, user!.id);
-    console.log(data, error);
+  const handleOpen = () => {
+    navigation.navigate("AnimeCollection", { collection });
   };
 
   return (
@@ -25,7 +23,7 @@ export const CollectionShort: React.FC<CollectionShortProps> = ({ collection }) 
         <RightActions progress={progress} dragValue={dragValue} />
       )}
     >
-      <TouchableOpacity onPress={test}>
+      <TouchableOpacity onPress={handleOpen}>
         <View
           style={{
             display: "flex",

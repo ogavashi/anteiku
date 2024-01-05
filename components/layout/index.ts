@@ -5,3 +5,4 @@ export { ListLayout } from "./ListLayout";
 export { ItemLayout } from "./ItemLayout";
 export { SearchLayout } from "./SearchLayout";
 export { LibraryLayout } from "./LibraryLayout";
+export { CollectionLayout } from "./CollectionLayout";

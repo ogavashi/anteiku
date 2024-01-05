@@ -1,0 +1,1 @@
+export { AnimeGridList } from "./AnimeGridList";

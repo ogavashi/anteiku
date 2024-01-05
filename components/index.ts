@@ -5,6 +5,7 @@ export {
   ItemLayout,
   SearchLayout,
   LibraryLayout,
+  CollectionLayout,
 } from "./layout";
 export {
   DotsCarousel,

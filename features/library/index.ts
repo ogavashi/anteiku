@@ -1,1 +1,7 @@
-export { Collections, EditModal, AddToLibrarySheet } from "./components";
+export {
+  Collections,
+  EditModal,
+  AddToLibrarySheet,
+  AnimeGridList,
+  MangaGridList,
+} from "./components";

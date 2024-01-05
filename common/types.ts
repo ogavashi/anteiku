@@ -60,6 +60,10 @@ export type TabParamList = {
 export type LibraryStackParamsList = {
   Library: undefined;
   List: undefined;
+  Anime: { id: string; title: string };
+  Manga: { id: string; title: string };
+  AnimeCollection: { collection: Collection };
+  MangaCollection: { collection: Collection };
 };
 
 export type SearchStackParamsList = {
