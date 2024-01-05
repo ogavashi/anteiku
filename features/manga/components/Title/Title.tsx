@@ -13,7 +13,7 @@ interface TitleProps {
 export const Title: React.FC<TitleProps> = ({ item }) => {
   return (
     <View style={{ display: "flex", justifyContent: "center", gap: 20 }}>
-      <TopSegment title={item.title} year={item.year} type={item.type} />
+      <TopSegment title={item} />
       <Poster url={item.image} />
       <SnackList title="Genres" data={item.genres} queryKey="genres" />
       <TextBlock title="Synopsis" text={item.synopsis} />
